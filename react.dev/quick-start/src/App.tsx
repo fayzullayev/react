@@ -14,15 +14,17 @@ function App() {
    return (
       <div>
          <Name myName />
+
          <Name myName={false} />
+
          <Button count={count} setCount={handleClick}>
-            Click me!
+            Button 1
          </Button>
          <Button count={count} setCount={handleClick}>
-            Click me!
+            Button 2
          </Button>
          <Button count={count} setCount={handleClick}>
-            Click me!
+            Button 3
          </Button>
          <hr />
 

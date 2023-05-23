@@ -7,8 +7,8 @@ interface ButtonProps extends PropsWithChildren {
 const Name = ({ myName }: ButtonProps) => {
    return (
       <div>
-         my name : {myName ? 'Mirodil\n' : 'Your name\n'}
-         {myName && 'Helllo'}
+         my name : {myName ? 'Mirodil' : 'Your name'}
+         <p> {myName && 'Helllo'}</p>
       </div>
    );
 };
