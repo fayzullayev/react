@@ -1,20 +1,29 @@
+import { useState } from 'react';
+import Products from './components/products';
+import Name from './components/name';
 import Button from './components/button';
 import './App.css';
-import Name from './components/name';
-import Products from './components/products';
 
 function App() {
-   const hello = 'hello';
+   const [count, setCount] = useState<number>(0);
 
-   // const p = {
-   //    color: 'red',
-   // };
+   function handleClick(): void {
+      setCount((prevState: number) => prevState + 1);
+   }
 
    return (
       <div>
          <Name myName />
          <Name myName={false} />
-         <Button hi={hello}>Click me!</Button>
+         <Button count={count} setCount={handleClick}>
+            Click me!
+         </Button>
+         <Button count={count} setCount={handleClick}>
+            Click me!
+         </Button>
+         <Button count={count} setCount={handleClick}>
+            Click me!
+         </Button>
          <hr />
 
          <Products />

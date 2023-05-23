@@ -1,13 +1,14 @@
 import { PropsWithChildren } from 'react';
 
 interface ButtonProps extends PropsWithChildren {
-   hi: string;
+   count: number;
+   setCount: () => void;
 }
 
-const Button = ({ hi, children }: ButtonProps) => {
+const Button = ({ count, setCount, children }: ButtonProps) => {
    return (
-      <button>
-         {children} : {hi}
+      <button onClick={setCount}>
+         {children} : {count}
       </button>
    );
 };

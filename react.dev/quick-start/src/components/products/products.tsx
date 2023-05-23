@@ -1,15 +1,18 @@
-const products = [
-   { title: 'Cabbage', id: 1 },
-   { title: 'Garlic', id: 2 },
-   { title: 'Apple', id: 3 },
+import { ReactElement } from 'react';
+import { ProductItem } from '../../models/ProductItem.ts';
+import Product from '../product';
+
+const products: ProductItem[] = [
+   new ProductItem(1, 'Cabbage'),
+   new ProductItem(2, 'Garlic'),
+   new ProductItem(3, 'Apple'),
 ];
 const Products = () => {
-   return (
-      <div>
-         my name : {myName ? 'Mirodil\n' : 'Your name\n'}
-         {myName && 'Helllo'}
-      </div>
-   );
+   const items: ReactElement[] = products.map((product: ProductItem) => (
+      <Product key={product.id} {...product} />
+   ));
+
+   return <div>{items}</div>;
 };
 
 export default Products;

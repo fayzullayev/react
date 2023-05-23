@@ -1,20 +1,16 @@
 import { PropsWithChildren } from 'react';
 
-interface ButtonProps extends PropsWithChildren {
-   myName: boolean;
+interface ButtonProduct extends PropsWithChildren {
+   title: string;
 }
 
-const Product = ({ myName }: ButtonProps) => {
+const Product = ({ title }: ButtonProduct) => {
    return (
       <div>
-         my name : {myName ? 'Mirodil\n' : 'Your name\n'}
-         {myName && 'Helllo'}
+         <h2>{title === 'Garlic' ? 'Garlic' : <p style={{ color: 'red' }}>{title}</p>}</h2>
+         <hr />
       </div>
    );
 };
 
 export default Product;
-
-export class ProductItem {
-   constructor(public id: number, public title: string) {}
-}
