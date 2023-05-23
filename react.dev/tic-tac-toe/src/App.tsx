@@ -1,9 +1,12 @@
 import { ReactElement } from 'react';
+import Square from './components/square/square.tsx';
 
 function App(): ReactElement {
    return (
       <div>
-         <h1>Hello world</h1>
+         <Square />
+         <Square />
+         <Square />
       </div>
    );
 }
