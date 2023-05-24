@@ -3,11 +3,25 @@ import Square from './components/square/square.tsx';
 
 function App(): ReactElement {
    return (
-      <div>
-         <Square />
-         <Square />
-         <Square />
-      </div>
+      <>
+         <div className="board-row">
+            <Square>1</Square>
+            <Square>2</Square>
+            <Square>3</Square>
+         </div>
+
+         <div className="board-row">
+            <Square>1</Square>
+            <Square>2</Square>
+            <Square>3</Square>
+         </div>
+
+         <div className="board-row">
+            <Square>1</Square>
+            <Square>2</Square>
+            <Square>3</Square>
+         </div>
+      </>
    );
 }
 

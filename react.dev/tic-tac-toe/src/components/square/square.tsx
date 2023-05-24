@@ -1,7 +1,7 @@
-import { ReactElement } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 
-function Square(): ReactElement {
-   return <button>X</button>;
+function Square({ children }: PropsWithChildren): ReactElement {
+   return <button className="square">{children}</button>;
 }
 
 export default Square;
