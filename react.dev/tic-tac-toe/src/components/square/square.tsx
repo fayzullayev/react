@@ -2,12 +2,13 @@ import { ReactElement } from 'react';
 
 interface SquareProps {
    value: string | null;
-   onSquareClick: (index: null | string) => void;
+   onSquareClick: () => void;
 }
 function Square({ value, onSquareClick }: SquareProps): ReactElement {
+   console.log('value : ', value);
    function handleClick(): void {
       // onSquareClick(value);
-      onSquareClick(value);
+      onSquareClick();
    }
 
    return (
