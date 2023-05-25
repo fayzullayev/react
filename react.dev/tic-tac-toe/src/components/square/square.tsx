@@ -1,12 +1,13 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 
-// interface SquareProps extends PropsWithChildren {
-//    value: number;
-// }
-function Square(): ReactElement {
-   const [value, setValue] = useState<string | undefined>();
+interface SquareProps {
+   value: string | null;
+   onSquareClick: (index: null | string) => void;
+}
+function Square({ value, onSquareClick }: SquareProps): ReactElement {
    function handleClick(): void {
-      setValue('X');
+      // onSquareClick(value);
+      onSquareClick(value);
    }
 
    return (
