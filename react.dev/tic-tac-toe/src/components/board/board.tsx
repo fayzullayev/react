@@ -2,9 +2,9 @@ import Square from '../square';
 import { ReactElement, useState } from 'react';
 
 function Board() {
-   const [square, setSquare] = useState<string[] | null[]>(Array(9).fill(null));
+   const [squares, setSquare] = useState<string[] | null[]>(Array(9).fill(null));
    const [xIsNext, setXIsNext] = useState<boolean>(true);
-   const winner = calculateWinner(square);
+   const winner = calculateWinner(squares);
 
    let status: string;
 
@@ -15,11 +15,11 @@ function Board() {
    }
 
    function handleClick(index: number) {
-      if (square[index] || winner) {
+      if (squares[index] || winner) {
          return;
       }
 
-      const nextSquares = square.slice();
+      const nextSquares = squares.slice();
       nextSquares[index] = xIsNext ? 'X' : 'O';
       setSquare(nextSquares);
       setXIsNext((prevState) => !prevState);
@@ -29,7 +29,7 @@ function Board() {
       const rows: ReactElement[] = [];
 
       for (let i: number = start; i <= end; i++) {
-         rows.push(<Square key={i} onSquareClick={() => handleClick(i)} value={square[i]} />);
+         rows.push(<Square key={i} onSquareClick={() => handleClick(i)} value={squares[i]} />);
       }
 
       return rows;
