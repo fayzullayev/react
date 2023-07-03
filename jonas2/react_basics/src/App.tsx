@@ -5,13 +5,14 @@ function App() {
   const [advice, setAdvice] = useState<string>('');
   const [count, setCount] = useState<number>(0);
 
-  async function getAdvice() {
+  async function getAdvice(): Promise<void> {
     const res = await fetch('https://api.adviceslip.com/advice');
+
     const {
       slip: { advice },
     } = await res.json();
+
     setCount((prevState) => ++prevState);
-    // console.log();
     setAdvice(advice);
   }
 
