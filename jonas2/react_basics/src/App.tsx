@@ -1,5 +1,5 @@
-import './App.css';
 import { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
   const [advice, setAdvice] = useState<string>('');
@@ -33,9 +33,9 @@ function App() {
 
 export default App;
 
-type MessageProps = {
+interface MessageProps {
   count: number;
-};
+}
 
 function Message({ count }: MessageProps) {
   return (
