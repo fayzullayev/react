@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      function App() {
+        // return React.createElement('h1', { style: { color: 'red' } }, 'Hello World!');
+        // const time = new Date().toLocaleTimeString();
+
+        const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+
+        React.useEffect(() => {
+          setInterval(() => {
+            setTime(new Date().toLocaleTimeString());
+          }, 1000);
+        }, []);
+
+        return <h1>Salom Dunyo!!! {time}</h1>;
+      }
+
+      const element = document.getElementById('root');
+
+      const root = ReactDOM.createRoot(element);
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
