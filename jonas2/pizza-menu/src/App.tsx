@@ -1,11 +1,15 @@
 import "./App.css";
+// import Pizza from "./components/pizza";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import Menu from "./components/menu";
 
 function App() {
   return (
     <>
-      <div>
-        <h2>Hello</h2>
-      </div>
+      <Header />
+      <Menu />
+      <Footer />
     </>
   );
 }
