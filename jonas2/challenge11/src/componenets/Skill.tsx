@@ -1,6 +1,6 @@
 import { SkillType } from '../App.tsx';
 
-function emoji(rate: number): string {
+function getEmoji(rate: number): string {
   switch (rate) {
     case 5:
       return '💪';
@@ -14,7 +14,7 @@ function emoji(rate: number): string {
 function Skill({ name, rate, color }: SkillType) {
   return (
     <div className={'skill-container'} style={{ backgroundColor: color }}>
-      {name} {emoji(rate)}
+      {name} {getEmoji(rate)}
     </div>
   );
 }
