@@ -1,5 +1,6 @@
 import Pizza from "../pizza";
 import { PizzaTypes } from "../types/pizza.ts";
+import { ReactElement } from "react";
 
 const pizzaData: PizzaTypes[] = [
   {
@@ -46,14 +47,19 @@ const pizzaData: PizzaTypes[] = [
   },
 ];
 
-function Menu() {
+function Menu(): ReactElement {
+  let pizzas: ReactElement[] | null = null;
+
+  if (pizzaData.length > 0) {
+    pizzas = pizzaData.map((pizza: PizzaTypes) => {
+      return <Pizza key={pizza.name} {...pizza} />;
+    });
+  }
+
   return (
     <main className="menu">
       <h2>Our menu</h2>
-
-      {pizzaData.map((pizza: PizzaTypes) => {
-        return <Pizza key={pizza.name} {...pizza} />;
-      })}
+      {pizzas ? <ul className="pizzas">{pizzas}</ul> : <h1>No Pizza</h1>}
     </main>
   );
 }
