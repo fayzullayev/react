@@ -15,9 +15,7 @@ function App() {
   return (
     <div className={'steps'}>
       <StepNumbers step={step} />
-
       <Message step={step} />
-
       <Buttons step={step} onClick={clickHandler} />
     </div>
   );
