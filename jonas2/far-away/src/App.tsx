@@ -1,34 +1,56 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+// import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
+import Logo from './components/logo';
+import Form from './components/form';
+import PackingList from './components/packing-list';
+import Stats from './components/stats';
 import './App.css';
+import { ItemType } from './components/types.ts';
+
+const initialItems: ItemType[] = [
+  {
+    id: nanoid(),
+    description: 'Passports',
+    quantity: 2,
+    packed: false,
+  },
+  {
+    id: nanoid(),
+    description: 'Socks',
+    quantity: 12,
+    packed: true,
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [list, setList] = useState<ItemType[]>(initialItems);
+
+  function handleSubmit(item: ItemType) {
+    setList([...list, item]);
+  }
+
+  const length = list.length;
+
+  let progress = 0;
+
+  progress = list.reduce((acc, next) => {
+    if (next.packed) {
+      return acc + 1;
+    } else {
+      return acc;
+    }
+  }, 0);
+
+  progress = progress / length;
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className={'app'}>
+      <Logo />
+      <Form onSubmit={handleSubmit} />
+      <PackingList items={list} />
+      <Stats length={length} progress={progress} />
+    </div>
   );
 }
 
