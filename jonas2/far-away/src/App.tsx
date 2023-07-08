@@ -30,6 +30,10 @@ function App() {
     setList([...list, item]);
   }
 
+  function handleDelete(id: string) {
+    setList((prevState) => prevState.filter((item) => item.id != id));
+  }
+
   const length = list.length;
 
   let progress = 0;
@@ -42,13 +46,15 @@ function App() {
     }
   }, 0);
 
-  progress = progress / length;
+  if (length > 0) {
+    progress = progress / length;
+  }
 
   return (
     <div className={'app'}>
       <Logo />
       <Form onSubmit={handleSubmit} />
-      <PackingList items={list} />
+      <PackingList items={list} onDelete={handleDelete} />
       <Stats length={length} progress={progress} />
     </div>
   );
