@@ -1,10 +1,16 @@
 import { ItemType } from '../types.ts';
 
-interface ItemType2 extends ItemType {
+interface ItemTypeComponentType extends ItemType {
   onDelete: (id: string) => void;
 }
 
-function Item({ id, packed, quantity, description, onDelete }: ItemType2) {
+function Item({
+  id,
+  packed,
+  quantity,
+  description,
+  onDelete,
+}: ItemTypeComponentType) {
   return (
     <li>
       <span className="item">
@@ -13,7 +19,7 @@ function Item({ id, packed, quantity, description, onDelete }: ItemType2) {
         </span>
         <div
           onClick={() => onDelete(id)}
-          style={{ fontSize: 18, marginLeft: 5 }}
+          style={{ fontSize: 18, marginLeft: 5, cursor: 'pointer' }}
         >
           ❌
         </div>

@@ -2,6 +2,7 @@ type StatsType = {
   length: number;
   progress: number;
 };
+
 function Stats({ length, progress }: StatsType) {
   return (
     <footer className="stats">

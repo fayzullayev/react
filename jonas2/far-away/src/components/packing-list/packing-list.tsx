@@ -5,6 +5,7 @@ type PackingListType = {
   items: ItemType[];
   onDelete: (id: string) => void;
 };
+
 function PackingList({ items, onDelete }: PackingListType) {
   return (
     <div className="list">
