@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { ItemType } from '../types.ts';
 import { nanoid } from 'nanoid';
+import { ItemType } from '../types.ts';
 
 type FormType = {
   onSubmit: (item: ItemType) => void;
