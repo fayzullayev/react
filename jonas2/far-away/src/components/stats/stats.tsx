@@ -1,15 +1,28 @@
 type StatsType = {
   length: number;
-  progress: number;
+  percentOfPacked: number;
+  packedItem: number;
 };
 
-function Stats({ length, progress }: StatsType) {
+function Stats({ length, percentOfPacked, packedItem }: StatsType) {
+  if (packedItem === 0) {
+    return (
+      <footer className="stats">
+        <em>Start adding some items to your packing list 🚀</em>
+      </footer>
+    );
+  }
+
   return (
     <footer className="stats">
-      <em>
-        💼 You have {length} items on your list, and you already packed{' '}
-        {(progress * 100).toFixed()}%
-      </em>
+      {percentOfPacked === 1 ? (
+        <em>You got everything. Ready to go ✈️!</em>
+      ) : (
+        <em>
+          💼 You have {length} items on your list, and you already packed{' '}
+          {packedItem} ({(percentOfPacked * 100).toFixed()}%)
+        </em>
+      )}
     </footer>
   );
 }

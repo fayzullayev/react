@@ -2,6 +2,7 @@ import { ItemType } from '../types.ts';
 
 interface ItemTypeComponentType extends ItemType {
   onDelete: (id: string) => void;
+  onToggle: (id: string) => void;
 }
 
 function Item({
@@ -10,11 +11,23 @@ function Item({
   quantity,
   description,
   onDelete,
+  onToggle,
 }: ItemTypeComponentType) {
+  function handleToggle() {
+    onToggle(id);
+  }
   return (
     <li>
       <span className="item">
-        <span style={packed ? { textDecoration: 'line-through' } : {}}>
+        <input type="checkbox" checked={packed} onChange={handleToggle} />
+
+        <span
+          style={
+            packed
+              ? { textDecoration: 'line-through', marginLeft: 8 }
+              : { marginLeft: 8 }
+          }
+        >
           {quantity} {description}
         </span>
         <div
