@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { AccordionItemType } from '../../App.tsx';
 import AccordionHeader from './accordion-header';
 import AccordionContent from './accordion-content';
-import { useState } from 'react';
 
 interface AccordionItemCType extends AccordionItemType {
   number: number;
@@ -13,15 +13,14 @@ function AccordionItem({ text, title, number }: AccordionItemCType) {
   function handleSetToggle() {
     setIsOpen((prevState) => !prevState);
   }
+
   return (
-    <div className={`accordion-item ${isOpen ? 'active' : ''}`}>
+    <div
+      onClick={handleSetToggle}
+      className={`accordion-item ${isOpen ? 'active' : ''}`}
+    >
       <AccordionHeader number={number} isOpen={isOpen} />
-      <AccordionContent
-        text={text}
-        title={title}
-        isOpen={isOpen}
-        onSetToggle={handleSetToggle}
-      />
+      <AccordionContent text={text} title={title} isOpen={isOpen} />
     </div>
   );
 }
