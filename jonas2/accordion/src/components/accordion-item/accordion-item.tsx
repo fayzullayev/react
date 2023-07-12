@@ -1,26 +1,25 @@
-import { useState } from 'react';
-import { AccordionItemType } from '../../App.tsx';
 import AccordionHeader from './accordion-header';
-import AccordionContent from './accordion-content';
+import { PropsWithChildren } from 'react';
 
-interface AccordionItemCType extends AccordionItemType {
+interface AccordionItemCType extends PropsWithChildren {
   number: number;
+  onToggle: (num: number) => void;
+  isOpen: boolean;
 }
 
-function AccordionItem({ text, title, number }: AccordionItemCType) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleSetToggle() {
-    setIsOpen((prevState) => !prevState);
-  }
-
+function AccordionItem({
+  number,
+  onToggle,
+  isOpen,
+  children,
+}: AccordionItemCType) {
   return (
     <div
-      onClick={handleSetToggle}
+      onClick={() => onToggle(number)}
       className={`accordion-item ${isOpen ? 'active' : ''}`}
     >
       <AccordionHeader number={number} isOpen={isOpen} />
-      <AccordionContent text={text} title={title} isOpen={isOpen} />
+      {children}
     </div>
   );
 }

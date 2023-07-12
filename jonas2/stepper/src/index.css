@@ -61,20 +61,20 @@ body {
   justify-content: space-between;
 }
 
-.buttons button {
+.button {
   border: none;
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 100px;
   font-size: 14px;
   font-weight: bold;
-
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
-.buttons button span {
+.button span {
   font-size: 16px;
   line-height: 1;
 }

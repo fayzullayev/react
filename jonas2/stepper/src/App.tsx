@@ -2,6 +2,13 @@ import { useState } from 'react';
 import StepNumbers from './components/step-numbers';
 import Message from './components/message';
 import Buttons from './components/buttons';
+import { Button } from './components/buttons/buttons.tsx';
+
+const messages: string[] = [
+  'Learn React ⚛️',
+  'Apply for jobs 💼',
+  'Invest your new income 🤑',
+];
 
 function App() {
   const [step, setStep] = useState<number>(1);
@@ -28,7 +35,7 @@ function App() {
       {isOpen && (
         <div className={'steps'}>
           <StepNumbers step={step} />
-          <Message step={step} />
+          <Message step={step}>{messages[step - 1]}</Message>
           <Buttons step={step} onClick={handlerClick} />
         </div>
       )}

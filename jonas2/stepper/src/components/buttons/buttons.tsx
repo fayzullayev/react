@@ -1,14 +1,17 @@
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
 type ButtonsType = {
   step: number;
   onClick: (isPrev?: boolean) => void;
 };
+
 function Buttons({ step, onClick }: ButtonsType) {
   const isFirst = step === 1;
   const isLast = step === 3;
 
   return (
     <div className={'buttons'}>
-      <button
+      <Button
         disabled={isFirst}
         onClick={() => onClick(true)}
         style={{
@@ -16,9 +19,10 @@ function Buttons({ step, onClick }: ButtonsType) {
           color: '#fff',
         }}
       >
-        Previous
-      </button>
-      <button
+        <span>👈</span>Previous
+      </Button>
+
+      <Button
         disabled={isLast}
         onClick={() => onClick()}
         style={{
@@ -26,10 +30,25 @@ function Buttons({ step, onClick }: ButtonsType) {
           color: '#fff',
         }}
       >
-        Next
-      </button>{' '}
+        Next<span>👉</span>
+      </Button>
     </div>
   );
 }
 
 export default Buttons;
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  text?: string;
+  children?: ReactNode;
+  emoji?: string;
+}
+
+export function Button({ emoji, children, ...rest }: ButtonProps) {
+  return (
+    <button className={'button'} {...rest}>
+      {emoji && <span>{emoji}</span>}
+      {children}
+    </button>
+  );
+}

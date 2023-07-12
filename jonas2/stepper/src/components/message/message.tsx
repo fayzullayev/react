@@ -1,18 +1,15 @@
-const messages: string[] = [
-  'Learn React ⚛️',
-  'Apply for jobs 💼',
-  'Invest your new income 🤑',
-];
+import { PropsWithChildren } from 'react';
 
-type MessageType = {
+interface MessageType extends PropsWithChildren {
   step: number;
-};
+}
 
-function Message({ step }: MessageType) {
+function Message({ step, children }: MessageType) {
   return (
-    <p className={'message'}>
-      Step {step} : {messages[step - 1]}
-    </p>
+    <div className={'message'}>
+      <h3>Step {step}:</h3>
+      {children}
+    </div>
   );
 }
 
