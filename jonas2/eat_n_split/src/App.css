@@ -1,0 +1,76 @@
+.user_section {
+  border: 1px solid blue;
+}
+
+.bill_section {
+  border: 1px solid grey;
+}
+
+.user {
+  display: flex;
+  border: 1px solid blue;
+  padding: 12px;
+}
+
+.user.active {
+  background: #be9d7a;
+}
+
+.user_avatar {
+  border: 1px solid red;
+  margin-right: 16px;
+}
+
+.user_avatar img {
+  border-radius: 50%;
+}
+
+.user_info {
+  border: 1px solid black;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.user_actions {
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_info_name {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.user_info_balance {
+  font-size: 14px;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: #11c211;
+}
+
+.even {
+  color: #d2d2d2;
+}
+
+.add_form {
+  display: grid;
+  grid-template-columns: 40% 50%;
+  column-gap: 3rem;
+  background: #be9d7a;
+  padding: 12px;
+}
+
+.add_form input {
+  width: 100%;
+}
