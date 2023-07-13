@@ -10,6 +10,11 @@
   display: flex;
   border: 1px solid blue;
   padding: 12px;
+  transition: 0.4s;
+}
+
+.user:hover {
+  background-color: #fae7d6;
 }
 
 .user.active {
@@ -23,6 +28,8 @@
 
 .user_avatar img {
   border-radius: 50%;
+  width: 48px;
+  height: 48px;
 }
 
 .user_info {
@@ -60,17 +67,35 @@
 }
 
 .even {
-  color: #d2d2d2;
+  color: #838383;
 }
 
 .add_form {
-  display: grid;
-  grid-template-columns: 40% 50%;
-  column-gap: 3rem;
-  background: #be9d7a;
+  background: #fae7d6;
   padding: 12px;
+  margin-bottom: 12px;
+  margin-top: 12px;
+  border-radius: 7px;
 }
 
 .add_form input {
-  width: 100%;
+  width: 180px;
+  border: none;
+  height: 25px;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+.add_form .name {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+  font-size: 15px;
+}
+
+.add_form .image {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
 }

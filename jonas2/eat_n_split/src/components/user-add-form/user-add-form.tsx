@@ -1,29 +1,67 @@
+import { useState, useRef, useEffect, FormEvent } from 'react';
 import Button from '../button';
-import { useState } from 'react';
 
-function UserAddForm() {
+type UserAddFormProps = {
+  onAddFriend: (name: string, image: string) => void;
+  onClose: () => void;
+};
+
+const initialImageUrlState = 'https://i.pravatar.cc/48';
+
+function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
   const [name, setName] = useState('');
-  const [img, setImg] = useState('');
+  const [image, setImage] = useState(initialImageUrlState);
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  }, []);
+
+  function addHandler(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (name.length > 0 && image.length > 0) {
+      onAddFriend(name, image);
+      setName('');
+      setImage(initialImageUrlState);
+      onClose();
+      return;
+    }
+
+    alert('Fill the inputs');
+  }
+
   return (
-    <div className="add_form">
-      <div className="left">
+    <form className="add_form" onSubmit={addHandler}>
+      <div className="name">
         <div>👯‍ Friend name</div>
-        <div>🌅 Image URL</div>
-      </div>
-      <div className="right">
         <input
+          ref={ref}
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+      </div>
+      <div className="image">
+        <div>🌅 Image URL</div>
         <input
           type="text"
-          value={img}
-          onChange={(e) => setImg(e.target.value)}
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
         />
-        <Button style={{ width: '100%' }}>Add</Button>
       </div>
-    </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginTop: 18,
+        }}
+      >
+        <Button style={{ width: 180 }}>Add</Button>
+      </div>
+    </form>
   );
 }
 

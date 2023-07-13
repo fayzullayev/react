@@ -1,12 +1,12 @@
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import User from './components/user';
+import Button from './components/button';
+import UserAddForm from './components/user-add-form';
 import './App.css';
 // import Users from './components/users';
 // import UserAddForm from './components/user-add-form';
 // import PayForm from './components/pay-form';
-import { nanoid } from 'nanoid';
-import { useState } from 'react';
-import User from './components/user';
-import Button from './components/button';
-import UserAddForm from './components/user-add-form';
 // import UserAddForm from './components/user-add-form';
 
 const initialFriends: UserDataType[] = [
@@ -39,10 +39,14 @@ export type UserDataType = {
 
 function App() {
   const [users, setUsers] = useState<UserDataType[]>(initialFriends);
-  // const [isAddUserOpen, setIsAddUserOpen] = useState<boolean>(false);
+  const [isAddUserOpen, setIsAddUserOpen] = useState<boolean>(false);
 
-  function handleAddFriend(newUser: UserDataType) {
-    setUsers([...users, newUser]);
+  function handleToggleAddForm() {
+    setIsAddUserOpen((prevState) => !prevState);
+  }
+  function handleAddFriend(name: string, image: string) {
+    const newFriend: UserDataType = { id: nanoid(), name, image, balance: 0 };
+    setUsers([...users, newFriend]);
   }
   //
   // function handlePay(money: number) {
@@ -60,9 +64,24 @@ function App() {
         {users.map((user: UserDataType) => (
           <User key={user.id} {...user} />
         ))}
-        {<UserAddForm />}
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button>Add friend</Button>
+
+        {isAddUserOpen && (
+          <UserAddForm
+            onClose={handleToggleAddForm}
+            onAddFriend={handleAddFriend}
+          />
+        )}
+
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginRight: 12,
+          }}
+        >
+          <Button onClick={handleToggleAddForm}>
+            {isAddUserOpen ? 'Close' : 'Add friend'}
+          </Button>
         </div>
       </div>
       <div className="bill_section">
