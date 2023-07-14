@@ -6,7 +6,7 @@ import UserAddForm from './components/user-add-form';
 import './App.css';
 // import Users from './components/users';
 // import UserAddForm from './components/user-add-form';
-// import PayForm from './components/pay-form';
+import PayForm from './components/pay-form';
 // import UserAddForm from './components/user-add-form';
 
 const initialFriends: UserDataType[] = [
@@ -85,7 +85,7 @@ function App() {
         </div>
       </div>
       <div className="bill_section">
-        {/*<PayForm onAddFriend={handleAddFriend} />*/}
+        <PayForm />
       </div>
     </div>
   );
