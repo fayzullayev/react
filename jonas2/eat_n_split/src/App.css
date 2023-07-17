@@ -102,6 +102,10 @@
 
 .pay-form-container {
   background: #fff4e6;
-  padding: 24px;
+  padding: 32px;
   border-radius: 7px;
+}
+
+.pay-form-container h1 {
+  text-transform: uppercase;
 }

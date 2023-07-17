@@ -31,6 +31,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
     }
 
     alert('Fill the inputs');
+    ref.current?.focus();
   }
 
   return (

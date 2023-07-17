@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 }
 
 .input .input-title {
@@ -22,4 +23,17 @@
   height: 25px;
   border-radius: 4px;
   background-color: rgba(255, 248, 240, 0.93);
+}
+
+.input-container2.friend {
+  font-size: 13px;
+  padding: 2px 8px;
+}
+
+.input-container2 select {
+  width: 100%;
+  border: none;
+  outline: none;
+  height: 25px;
+  text-align: center;
 }

@@ -1,9 +1,21 @@
-import { UserDataType } from '../../App.tsx';
+import { FriendDataType } from '../../App.tsx';
 import Button from '../button';
 import { ReactNode } from 'react';
 
-// interface UserPropsType extends UserDataType {}
-function User({ name, image, balance }: UserDataType) {
+interface UserPropsType extends FriendDataType {
+  onSelectFriend: (id: string) => void;
+  onClear: () => void;
+  isOpened: boolean;
+}
+function User({
+  name,
+  image,
+  balance,
+  id,
+  onSelectFriend,
+  isOpened,
+  onClear,
+}: UserPropsType) {
   let message: ReactNode;
 
   if (balance > 0) {
@@ -22,6 +34,10 @@ function User({ name, image, balance }: UserDataType) {
     message = <span className="even">You and Anthony are even</span>;
   }
 
+  function handleClick() {
+    onSelectFriend(id);
+  }
+
   return (
     <div className="user">
       <div className="user_avatar">
@@ -32,7 +48,9 @@ function User({ name, image, balance }: UserDataType) {
         <div className="user_info_balance">{message}</div>
       </div>
       <div className="user_actions">
-        <Button>Select</Button>
+        <Button onClick={isOpened ? onClear : handleClick}>
+          {isOpened ? 'Close' : 'Select'}
+        </Button>
       </div>
     </div>
   );

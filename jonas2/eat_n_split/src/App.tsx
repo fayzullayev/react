@@ -3,13 +3,10 @@ import { nanoid } from 'nanoid';
 import User from './components/user';
 import Button from './components/button';
 import UserAddForm from './components/user-add-form';
-import './App.css';
-// import Users from './components/users';
-// import UserAddForm from './components/user-add-form';
 import PayForm from './components/pay-form';
-// import UserAddForm from './components/user-add-form';
+import './App.css';
 
-const initialFriends: UserDataType[] = [
+const initialFriends: FriendDataType[] = [
   {
     id: nanoid(),
     name: 'Clark',
@@ -30,7 +27,7 @@ const initialFriends: UserDataType[] = [
   },
 ];
 
-export type UserDataType = {
+export type FriendDataType = {
   id: string;
   name: string;
   image: string;
@@ -38,31 +35,61 @@ export type UserDataType = {
 };
 
 function App() {
-  const [users, setUsers] = useState<UserDataType[]>(initialFriends);
+  const [friends, setFriends] = useState<FriendDataType[]>(initialFriends);
   const [isAddUserOpen, setIsAddUserOpen] = useState<boolean>(false);
+  const [currentFriend, setCurrentFriend] = useState<
+    FriendDataType | undefined
+  >(undefined);
 
-  function handleToggleAddForm() {
+  function handleToggleAddForm(): void {
     setIsAddUserOpen((prevState) => !prevState);
   }
-  function handleAddFriend(name: string, image: string) {
-    const newFriend: UserDataType = { id: nanoid(), name, image, balance: 0 };
-    setUsers([...users, newFriend]);
-  }
-  //
-  // function handlePay(money: number) {
-  //   // setUsers([...users, newUser]);
-  // }
 
-  // function handleSelect(id: string | null) {
-  //   // setUsers([...users, newtUser]);
-  //   setCurrentUserId(id);
-  // }
+  function handleAddFriend(name: string, image: string): void {
+    const newFriend: FriendDataType = { id: nanoid(), name, image, balance: 0 };
+    setFriends([...friends, newFriend]);
+  }
+
+  function handleCurrentFriend(id: string) {
+    let friend;
+
+    const filteredFriends = friends.filter(
+      (user: FriendDataType) => user.id === id,
+    );
+
+    if (filteredFriends.length > 0) {
+      friend = filteredFriends[0];
+    }
+
+    setCurrentFriend(friend);
+  }
+
+  function handleBillPay(billAmount: number) {
+    setFriends((prevState) =>
+      prevState.map((user: FriendDataType) =>
+        user.id === currentFriend?.id
+          ? { ...user, balance: user.balance + billAmount }
+          : user,
+      ),
+    );
+    handleClear();
+  }
+
+  function handleClear() {
+    setCurrentFriend(undefined);
+  }
 
   return (
     <div className="app">
       <div className="user_section">
-        {users.map((user: UserDataType) => (
-          <User key={user.id} {...user} />
+        {friends.map((user: FriendDataType) => (
+          <User
+            key={user.id}
+            {...user}
+            onSelectFriend={handleCurrentFriend}
+            isOpened={user.id === currentFriend?.id}
+            onClear={handleClear}
+          />
         ))}
 
         {isAddUserOpen && (
@@ -84,8 +111,11 @@ function App() {
           </Button>
         </div>
       </div>
+
       <div className="bill_section">
-        <PayForm />
+        {currentFriend && (
+          <PayForm friend={currentFriend} onPay={handleBillPay} />
+        )}
       </div>
     </div>
   );
