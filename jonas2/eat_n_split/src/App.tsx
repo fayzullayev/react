@@ -28,6 +28,7 @@ const initialFriends: FriendDataType[] = [
 
 function App() {
   const [friends, setFriends] = useState<FriendDataType[]>(initialFriends);
+
   const [currentFriend, setCurrentFriend] = useState<
     FriendDataType | undefined
   >(undefined);

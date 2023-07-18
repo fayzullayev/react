@@ -55,7 +55,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
         />
       </div>
 
-      <div className="form-actions" style={{}}>
+      <div className="form-actions">
         <Button style={{ width: 180 }}>Add</Button>
       </div>
     </form>

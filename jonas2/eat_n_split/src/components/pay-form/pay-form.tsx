@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Button from '../button';
 import { FriendDataType } from '../types.ts';
 import './style.css';
+import Input from '../input';
 
 type PayFormProps = {
   onPay: (payAmount: number) => void;
@@ -33,32 +34,29 @@ function PayForm({ onPay, friend }: PayFormProps) {
     <div className="pay-form-container">
       <h1 style={{ marginBottom: 24 }}>Split a bill with {friend.name}</h1>
 
-      <div className="input">
-        <div className="input-title">💰 Bill value</div>
-        <div className="input-container">
-          <input
-            type="text"
-            value={bill}
-            onChange={(e) => setBill(+e.target.value)}
-          />
-        </div>
-      </div>
+      <Input
+        type="text"
+        value={bill}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setBill(+e.target.value)
+        }
+      >
+        💰 Bill value
+      </Input>
 
-      <div className="input">
-        <div className="input-title">🧍‍♀️ Your expense</div>
-        <div className="input-container">
-          <input
-            type="text"
-            value={myExpense}
-            onChange={(e) => setMyExpense(+e.target.value)}
-          />
-        </div>
-      </div>
+      <Input
+        type="text"
+        value={myExpense}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setMyExpense(+e.target.value)
+        }
+      >
+        🧍‍♀️ Your expense
+      </Input>
 
-      <div className="input">
-        <div className="input-title">🧑‍🤝‍🧑 {friend.name}'s expense</div>
-        <div className="input-container2 friend">{friendExpense}</div>
-      </div>
+      <Input disabled={true} type="number" value={friendExpense}>
+        🧑‍🤝‍🧑{friend.name}'s expense
+      </Input>
 
       <div className="input">
         <div className="input-title">🤑 Who is paying the bill</div>

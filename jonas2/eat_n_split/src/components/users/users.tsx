@@ -21,7 +21,7 @@ function Users({
   const [isAddUserOpen, setIsAddUserOpen] = useState<boolean>(false);
 
   function handleToggleAddForm(): void {
-    setIsAddUserOpen((prevState) => !prevState);
+    setIsAddUserOpen((s) => !s);
   }
 
   return (
