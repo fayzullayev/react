@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '../button';
-import { FriendDataType } from '../../App.tsx';
+import { FriendDataType } from '../types.ts';
 import './style.css';
 
 type PayFormProps = {
@@ -26,8 +26,6 @@ function PayForm({ onPay, friend }: PayFormProps) {
       payAmount = -myExpense;
     }
 
-    console.log(payAmount);
-    console.log(whoIsPaying);
     onPay(payAmount);
   }
 

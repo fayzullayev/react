@@ -1,6 +1,6 @@
-import { FriendDataType } from '../../App.tsx';
-import Button from '../button';
 import { ReactNode } from 'react';
+import { FriendDataType } from '../types.ts';
+import Button from '../button';
 
 interface UserPropsType extends FriendDataType {
   onSelectFriend: (id: string) => void;
@@ -31,7 +31,7 @@ function User({
       </span>
     );
   } else {
-    message = <span className="even">You and Anthony are even</span>;
+    message = <span className="gray">You and Anthony are even</span>;
   }
 
   function handleClick() {
@@ -39,15 +39,15 @@ function User({
   }
 
   return (
-    <div className="user">
-      <div className="user_avatar">
+    <div className={`user-container ${isOpened ? 'active' : ''}`}>
+      <div className="user-avatar">
         <img src={image} alt={name} />
       </div>
-      <div className="user_info">
-        <div className="user_info_name">{name}</div>
-        <div className="user_info_balance">{message}</div>
+      <div className="user-info">
+        <div className="user-info-name">{name}</div>
+        <div className="user-info-balance">{message}</div>
       </div>
-      <div className="user_actions">
+      <div className="user-actions">
         <Button onClick={isOpened ? onClear : handleClick}>
           {isOpened ? 'Close' : 'Select'}
         </Button>

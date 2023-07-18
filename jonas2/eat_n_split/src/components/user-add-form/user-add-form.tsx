@@ -9,8 +9,8 @@ type UserAddFormProps = {
 const initialImageUrlState = 'https://i.pravatar.cc/48';
 
 function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
-  const [name, setName] = useState('');
-  const [image, setImage] = useState(initialImageUrlState);
+  const [name, setName] = useState<string>('');
+  const [image, setImage] = useState<string>(initialImageUrlState);
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -20,7 +20,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
     }
   }, []);
 
-  function addHandler(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (name.length > 0 && image.length > 0) {
       onAddFriend(name, image);
@@ -35,7 +35,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
   }
 
   return (
-    <form className="add_form" onSubmit={addHandler}>
+    <form className="form" onSubmit={handleSubmit}>
       <div className="name">
         <div>👯‍ Friend name</div>
         <input
@@ -45,6 +45,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
           onChange={(e) => setName(e.target.value)}
         />
       </div>
+
       <div className="image">
         <div>🌅 Image URL</div>
         <input
@@ -53,13 +54,8 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
           onChange={(e) => setImage(e.target.value)}
         />
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginTop: 18,
-        }}
-      >
+
+      <div className="form-actions" style={{}}>
         <Button style={{ width: 180 }}>Add</Button>
       </div>
     </form>

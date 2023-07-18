@@ -1,6 +1,6 @@
-export type ItemType = {
+export type FriendDataType = {
   id: string;
-  description: string;
-  quantity: number;
-  packed: boolean;
+  name: string;
+  image: string;
+  balance: number;
 };
