@@ -38,6 +38,7 @@ function UserAddForm({ onAddFriend, onClose }: UserAddFormProps) {
     <form className="form" onSubmit={handleSubmit}>
       <div className="name">
         <div>👯‍ Friend name</div>
+
         <input
           ref={ref}
           type="text"

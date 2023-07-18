@@ -1,9 +1,6 @@
-import { ButtonHTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
-function Button({
-  children,
-  ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement>) {
+function Button({ children, ...rest }: HTMLAttributes<HTMLButtonElement>) {
   return (
     <button className={'button'} {...rest}>
       {children}

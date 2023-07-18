@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import Button from '../button';
 import { FriendDataType } from '../types.ts';
 import './style.css';
@@ -13,6 +13,11 @@ function PayForm({ onPay, friend }: PayFormProps) {
   const [bill, setBill] = useState<number>(0);
   const [myExpense, setMyExpense] = useState<number>(0);
   const [whoIsPaying, setWhoIsPaying] = useState<string>('1');
+
+  useEffect(() => {
+    setBill(0);
+    setMyExpense(0);
+  }, [friend]);
 
   let friendExpense = 0;
 
@@ -48,7 +53,7 @@ function PayForm({ onPay, friend }: PayFormProps) {
         type="text"
         value={myExpense}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setMyExpense(+e.target.value)
+          setMyExpense(+e.target.value > bill ? myExpense : +e.target.value)
         }
       >
         🧍‍♀️ Your expense
