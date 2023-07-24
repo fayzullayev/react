@@ -1,7 +1,8 @@
+import { WatchedMovieItem } from '../types.ts';
 import { average } from '../../utils.ts';
 
 type WatchedSummaryProps = {
-  watched: any[];
+  watched: WatchedMovieItem[];
 };
 function WatchedSummary({ watched }: WatchedSummaryProps) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));

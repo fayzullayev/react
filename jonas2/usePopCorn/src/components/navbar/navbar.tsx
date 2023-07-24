@@ -4,7 +4,7 @@ import Logo from '../logo';
 import NumResults from '../num-results';
 
 function Navbar() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState<string>('');
 
   return (
     <nav className="nav-bar">

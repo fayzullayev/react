@@ -1,14 +1,15 @@
 import WatchedMovie from '../watched-movie';
+import { WatchedMovieItem } from '../types.ts';
 
 type WatchedSummaryProps = {
-  watched: any[];
+  watched: WatchedMovieItem[];
 };
 
 function WatchedMovieList({ watched }: WatchedSummaryProps) {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} />
+        <WatchedMovie key={movie.imdbID} {...movie} />
       ))}
     </ul>
   );

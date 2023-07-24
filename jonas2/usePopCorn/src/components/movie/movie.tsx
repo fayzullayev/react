@@ -1,19 +1,14 @@
-type MovieProps = {
-  imdbID: string;
-  Poster: string;
-  Title: string;
-  Year: string;
-};
+import { MovieItem } from '../types.ts';
 
-function Movie({ imdbID, Poster, Title, Year }: MovieProps) {
+function Movie({ imdbID, year, title, poster }: MovieItem) {
   return (
     <li key={imdbID}>
-      <img src={Poster} alt={`${Title} poster`} />
-      <h3>{Title}</h3>
+      <img src={poster} alt={`${title} poster`} />
+      <h3>{title}</h3>
       <div>
         <p>
           <span>🗓</span>
-          <span>{Year}</span>
+          <span>{year}</span>
         </p>
       </div>
     </li>
