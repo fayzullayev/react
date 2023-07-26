@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import MovieList from '../movie-list';
+import { MovieItem } from '../types.ts';
 
-function ListBox() {
+type ListBoxProps = {
+  movies: MovieItem[] | null;
+};
+
+function ListBox({ movies }: ListBoxProps) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
@@ -9,7 +14,7 @@ function ListBox() {
       <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? '–' : '+'}
       </button>
-      {isOpen && <MovieList />}
+      {isOpen && <MovieList movies={movies} />}
     </div>
   );
 }

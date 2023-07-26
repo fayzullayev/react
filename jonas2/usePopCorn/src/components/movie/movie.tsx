@@ -7,7 +7,7 @@ function Movie({ imdbID, year, title, poster }: MovieItem) {
       <h3>{title}</h3>
       <div>
         <p>
-          <span>🗓</span>
+          <span>📅</span>
           <span>{year}</span>
         </p>
       </div>

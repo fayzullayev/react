@@ -1,10 +1,10 @@
-import ListBox from '../list-box';
+import { PropsWithChildren } from 'react';
 import WatchedBox from '../watched-box';
 
-function Main() {
+function Main({ children }: PropsWithChildren) {
   return (
     <main className="main">
-      <ListBox />
+      {children}
       <WatchedBox />
     </main>
   );

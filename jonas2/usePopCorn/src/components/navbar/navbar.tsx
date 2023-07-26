@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import Input from '../input';
 import Logo from '../logo';
-import NumResults from '../num-results';
 
-function Navbar() {
+function Navbar({ children }: PropsWithChildren) {
   const [query, setQuery] = useState<string>('');
 
   return (
@@ -16,7 +15,7 @@ function Navbar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <NumResults />
+      {children}
     </nav>
   );
 }
