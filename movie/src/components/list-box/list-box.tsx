@@ -1,6 +1,12 @@
-import { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
+import MovieList from '../movie-list';
+import { MovieItem } from '../types.ts';
 
-function ListBox({ children }: PropsWithChildren) {
+type ListBoxProps = {
+  movies: MovieItem[] | null;
+};
+
+function ListBox({ movies }: ListBoxProps) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
@@ -8,7 +14,7 @@ function ListBox({ children }: PropsWithChildren) {
       <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? '–' : '+'}
       </button>
-      {isOpen && children}
+      {isOpen && <MovieList movies={movies} />}
     </div>
   );
 }

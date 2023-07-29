@@ -4,7 +4,6 @@ import Main from './components/main/';
 import { MovieItem } from './components/types.ts';
 import NumResults from './components/num-results';
 import ListBox from './components/list-box';
-import MovieList from './components/movie-list';
 
 const tempMovieData: MovieItem[] = [
   {
@@ -36,12 +35,10 @@ export default function App() {
   return (
     <>
       <Navbar>
-        <NumResults movies={movies} cou />
+        <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <ListBox>
-          <MovieList movies={movies} />
-        </ListBox>
+        <ListBox movies={movies} />
       </Main>
     </>
   );
