@@ -1,6 +1,10 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, ReactNode, useState } from 'react';
 
-function ListBox({ children }: PropsWithChildren) {
+type BoxProps = {
+  element?: ReactNode;
+} & PropsWithChildren;
+
+function Box({ element }: BoxProps) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
@@ -8,9 +12,9 @@ function ListBox({ children }: PropsWithChildren) {
       <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
         {isOpen ? '–' : '+'}
       </button>
-      {isOpen && children}
+      {isOpen && element}
     </div>
   );
 }
 
-export default ListBox;
+export default Box;

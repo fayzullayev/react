@@ -1,12 +1,10 @@
-import { MovieItem } from '../types.ts';
-
 type NumResultsProps = {
-  movies: MovieItem[] | null;
+  count: number | undefined;
 };
-function NumResults({ movies }: NumResultsProps) {
+function NumResults({ count }: NumResultsProps) {
   return (
     <p className="num-results">
-      Found <strong>{movies?.length}</strong> results
+      Found <strong>{count ?? 0}</strong> results
     </p>
   );
 }
