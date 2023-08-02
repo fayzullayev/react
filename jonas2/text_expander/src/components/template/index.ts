@@ -1,3 +1,3 @@
-import Pizza from './template.tsx';
+import Pizza from "./template.tsx";
 
 export default Pizza;
