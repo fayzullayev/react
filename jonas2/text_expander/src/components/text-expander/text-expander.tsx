@@ -21,13 +21,12 @@ function TextExpander({
 }: TextExpanderProps) {
   const [isExpanded, setIsExpanded] = useState<boolean>(expanded);
 
-  let words;
+  let words: string;
 
   if (!isExpanded) {
-    const wordsArray = children?.split(" ");
-    words = wordsArray?.slice(0, collapsedNumWords);
-
-    words = words.join(" ");
+    let wordsArray: string[] = children?.split(" ");
+    wordsArray = wordsArray?.slice(0, collapsedNumWords);
+    words = wordsArray.join(" ");
     words += "...";
   } else {
     words = children;
