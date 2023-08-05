@@ -26,15 +26,19 @@ function TextExpander({
     const wordsArray = children?.split(" ");
     words = wordsArray?.slice(0, collapsedNumWords);
     words = words.join(" ");
-    words += "...";
+    words += "... ";
   } else {
-    words = children;
+    words = children + " ";
   }
 
   return (
-    <div>
+    <div className={className}>
       {words}
-      {isExpanded?}
+      {isExpanded ? (
+        <span onClick={() => setIsExpanded(false)}>{collapseButtonText}</span>
+      ) : (
+        <span onClick={() => setIsExpanded(true)}>{expandButtonText}</span>
+      )}
       <hr />
     </div>
   );
