@@ -4,6 +4,7 @@ import sortBy from 'sort-by';
 import { Contact } from './types.ts';
 
 export async function getContacts(query?: string) {
+  console.log('it Works!');
   await fakeNetwork(`getContacts:${query}`);
 
   let contacts: Contact[] | null = await localforage.getItem<Contact[] | null>(
@@ -77,6 +78,6 @@ async function fakeNetwork(key?: string) {
 
   fakeCache[key] = true;
   return new Promise((res) => {
-    setTimeout(res, Math.random() * 800);
+    setTimeout(res, Math.random() * 2500);
   });
 }
