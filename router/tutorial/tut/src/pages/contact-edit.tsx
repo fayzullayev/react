@@ -3,6 +3,7 @@ import {
   Form,
   redirect,
   useLoaderData,
+  useNavigate,
 } from 'react-router-dom';
 import { Contact } from '../types.ts';
 import { updateContact } from '../contact.ts';
@@ -17,6 +18,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function EditContact() {
   const contact: Contact = useLoaderData() as Contact;
+  const navigate = useNavigate();
 
   return (
     <Form method="post" id="contact-form">
@@ -62,7 +64,9 @@ export default function EditContact() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={() => navigate(-1)}>
+          Cancel
+        </button>
       </p>
     </Form>
   );

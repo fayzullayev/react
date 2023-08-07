@@ -4,11 +4,13 @@ import {
   Form,
   redirect,
   NavLink,
+  useNavigation,
 } from 'react-router-dom';
 import { createContact, getContacts } from '../contact.ts';
 import { Contact } from '../types.ts';
 
 export async function loader() {
+  // console.log('it Works in Root!');
   return await getContacts();
 }
 
@@ -20,8 +22,10 @@ export async function action() {
 
 export default function Root() {
   const contacts = useLoaderData() as Contact[];
+  const navigation = useNavigation();
 
-  console.log('contacts', contacts);
+  // console.log('contacts', contacts);
+  // console.log('navigation', navigation);
   return (
     <>
       <div id="sidebar">
@@ -74,7 +78,10 @@ export default function Root() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === 'loading' ? 'loading' : ''}
+      >
         <Outlet />
       </div>
     </>

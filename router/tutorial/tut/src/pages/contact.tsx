@@ -54,6 +54,12 @@ export default function ContactPage() {
               }
             }}
           >
+            <input
+              hidden={true}
+              type="text"
+              name={'name'}
+              defaultValue={'Mirodil'}
+            />
             <button type="submit">Delete</button>
           </Form>
         </div>

@@ -45,11 +45,14 @@ export async function updateContact(id: string | undefined, updates: Contact) {
   return contact;
 }
 
-export async function deleteContact(id: string) {
+export async function deleteContact(id?: string) {
+  console.log('delete id', id);
   const contacts: Contact[] | null = await localforage.getItem('contacts');
+  console.log('contacts', contacts);
   const index = contacts?.findIndex((contact) => contact.id === id);
+  console.log('index', index);
 
-  if (index) {
+  if (index !== undefined) {
     if (index > -1) {
       contacts?.splice(index, 1);
       await set(contacts);
@@ -78,6 +81,6 @@ async function fakeNetwork(key?: string) {
 
   fakeCache[key] = true;
   return new Promise((res) => {
-    setTimeout(res, Math.random() * 2500);
+    setTimeout(res, Math.random() * 500);
   });
 }
