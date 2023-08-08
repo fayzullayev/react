@@ -3,7 +3,7 @@ import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
 import { Contact } from './types.ts';
 
-export async function getContacts(query?: string) {
+export async function getContacts(query?: string | null) {
   console.log('it Works!');
   await fakeNetwork(`getContacts:${query}`);
 

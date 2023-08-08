@@ -5,14 +5,19 @@ import {
   redirect,
   NavLink,
   useNavigation,
+  ActionFunction,
+  useSubmit,
 } from 'react-router-dom';
 import { createContact, getContacts } from '../contact.ts';
 import { Contact } from '../types.ts';
+import { useEffect, useState } from 'react';
 
-export async function loader() {
-  // console.log('it Works in Root!');
-  return await getContacts();
-}
+export const loader: ActionFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const q = url.searchParams.get('q') || '';
+  const contacts = await getContacts(q);
+  return { contacts, q };
+};
 
 export async function action() {
   const contact = await createContact();
@@ -21,28 +26,56 @@ export async function action() {
 }
 
 export default function Root() {
-  const contacts = useLoaderData() as Contact[];
+  const { contacts, q } = useLoaderData() as {
+    contacts: Contact[];
+    q: string | null;
+  };
   const navigation = useNavigation();
+  const [query, setQuery] = useState(typeof q === 'string' ? q : '');
+  const submit = useSubmit();
 
-  // console.log('contacts', contacts);
-  // console.log('navigation', navigation);
+  useEffect(() => {
+    if (typeof q === 'string') {
+      setQuery(q);
+    }
+  }, [q]);
+
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has('q');
+
+  console.log(typeof q);
+
   return (
     <>
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+          <Form id="search-form" role="search">
             <input
               id="q"
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
+              className={searching ? 'loading' : ''}
               name="q"
+              value={query}
+              onChange={(event) => {
+                // console.log(event);
+                // console.log(event.currentTarget);
+                // console.log(event.currentTarget.form);
+                const isFirstSearch = q == null;
+                console.log('isFirstSearch', isFirstSearch);
+                console.log('q', q);
+                submit(event.currentTarget.form, {
+                  replace: true,
+                });
+              }}
             />
 
-            <div id="search-spinner" aria-hidden hidden={true} />
+            <div id="search-spinner" hidden={!searching} aria-hidden />
             <div className="sr-only" aria-live="polite"></div>
-          </form>
+          </Form>
           <Form method="post">
             <button type="submit">New</button>
           </Form>

@@ -1,4 +1,9 @@
-import { ActionFunction, Form, useLoaderData } from 'react-router-dom';
+import {
+  ActionFunction,
+  Form,
+  useFetcher,
+  useLoaderData,
+} from 'react-router-dom';
 import { Contact } from '../types.ts';
 import { getContact } from '../contact.ts';
 
@@ -75,9 +80,10 @@ type FavoriteProps = {
 function Favorite({ contact }: FavoriteProps) {
   // yes, this is a `let` for later
   const favorite = contact.favorite;
+  const fetcher = useFetcher();
 
   return (
-    <Form method="post">
+    <fetcher.Form method="post">
       <button
         name="favorite"
         value={favorite ? 'false' : 'true'}
@@ -85,6 +91,6 @@ function Favorite({ contact }: FavoriteProps) {
       >
         {favorite ? '★' : '☆'}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }
