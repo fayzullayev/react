@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const content = [
   {
@@ -25,6 +25,11 @@ export default function App() {
     </div>
   );
 }
+
+console.log(<div></div>);
+console.log(React.createElement("div", null, ""));
+console.log(<DifferentContent />);
+console.log(DifferentContent());
 
 function Tabbed({ content }) {
   const [activeTab, setActiveTab] = useState(0);
