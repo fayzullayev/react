@@ -30,6 +30,7 @@ export default function Root() {
     contacts: Contact[];
     q: string | null;
   };
+
   const navigation = useNavigation();
   const [query, setQuery] = useState(typeof q === 'string' ? q : '');
   const submit = useSubmit();
@@ -44,7 +45,7 @@ export default function Root() {
     navigation.location &&
     new URLSearchParams(navigation.location.search).has('q');
 
-  console.log(typeof q);
+  // console.log(typeof q);
 
   return (
     <>
@@ -61,14 +62,9 @@ export default function Root() {
               name="q"
               value={query}
               onChange={(event) => {
-                // console.log(event);
-                // console.log(event.currentTarget);
-                // console.log(event.currentTarget.form);
                 const isFirstSearch = q == null;
-                console.log('isFirstSearch', isFirstSearch);
-                console.log('q', q);
                 submit(event.currentTarget.form, {
-                  replace: true,
+                  replace: !isFirstSearch,
                 });
               }}
             />

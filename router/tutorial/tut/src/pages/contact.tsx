@@ -1,23 +1,36 @@
 import {
-  ActionFunction,
   Form,
+  LoaderFunction,
   useFetcher,
   useLoaderData,
 } from 'react-router-dom';
 import { Contact } from '../types.ts';
-import { getContact } from '../contact.ts';
+import { getContact, updateContact } from '../contact.ts';
+import { ActionFunctionArgs } from '@remix-run/router/utils.ts';
 
-export const loader: ActionFunction = async ({ params }) => {
-  if (!params.contactId) {
-    return null;
+export const loader: LoaderFunction = async ({ params }) => {
+  const contact = await getContact(params.contactId);
+  if (!contact) {
+    throw new Response('', {
+      status: 404,
+      statusText: 'Not Found',
+    });
   }
 
-  return await getContact(params.contactId);
+  console.log('contact-', contact);
+  return contact;
 };
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  return updateContact(params.contactId, {
+    favorite: formData.get('favorite') === 'true',
+  });
+}
 
 export default function ContactPage() {
   const contact: Contact = useLoaderData() as Contact;
-
+  console.log('contact-ContactPage', contact);
   return (
     <div id="contact">
       <div>
@@ -79,8 +92,12 @@ type FavoriteProps = {
 
 function Favorite({ contact }: FavoriteProps) {
   // yes, this is a `let` for later
-  const favorite = contact.favorite;
   const fetcher = useFetcher();
+  let favorite = contact.favorite;
+
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get('favorite') === 'true';
+  }
 
   return (
     <fetcher.Form method="post">
