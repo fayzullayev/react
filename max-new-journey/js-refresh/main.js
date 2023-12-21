@@ -1,3 +1,5 @@
-import nn, { apiKey as apiKeys, ggg } from '/util.js';
+import def, { apiKey, ggg } from '/util.js';
 
-console.log(apiKeys, nn, ggg);
+console.log('default', def);
+
+console.log('named export', apiKey, ggg);
