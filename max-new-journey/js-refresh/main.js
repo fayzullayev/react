@@ -38,11 +38,16 @@
 // // user['greet'](1, 2, 3);
 // user['greet1'](1, 2, 3);
 
-const hobbies = ['Sports', 'Cooking', 'Reading'];
+// const hobbies = ['Sports', 'Cooking', 'Reading'];
 
-const [hobby1, hobby2, hobby3] = hobbies;
+// const [hobby1, hobby2, hobby3] = hobbies;
 
-console.log(hobby1, hobby2, hobby3);
+// console.log(hobby1, hobby2, hobby3);
+
+// for (const i of [77, 88, 99]) {
+//   console.log(i);
+// }
+
 //
 // console.log(hobbies);
 // // console.log(hobbies[0]);
@@ -54,13 +59,47 @@ console.log(hobby1, hobby2, hobby3);
 //
 // console.log(hobbies.map((item) => ({ text: item })));
 
-const user = {
-  // name: 'Max',
-  // age: 34,
-};
+// const user = {
+//   name: 'Max',
+//   age: 34,
+// };
+//
+// function log({ name, age }) {
+//   console.log(name, age);
+// }
+//
+// log(user);
 
-function log({ name = 'Mirodil', age: yosh = 26 }) {
-  console.log(name, yosh);
-}
+// const fn = () => {
+//   console.log('Hello');
+// };
+//
+// setTimeout(
+//   (
+//     () => () => () =>
+//       fn
+//   )(),
+//   3000,
+// );
 
-log(user);
+// function greeter(num, fn) {
+//   fn(num);
+// }
+//
+// greeter(45, (nnn) => {
+//   console.log(nnn);
+// });
+
+const hobbies = ['Sports', 'Cooking', 'Reading'];
+
+console.log(hobbies);
+
+hobbies.push('Qwerty');
+
+console.log(hobbies);
+
+const hb = hobbies;
+
+hb[3] = 'yyyyy';
+
+console.log(hb);
