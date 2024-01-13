@@ -14,7 +14,7 @@ function Header({ level }) {
 }
 
 Header.propTypes = {
-  level: PropTypes.string,
+  level: PropTypes.string.isRequired,
 };
 
 export default Header;
