@@ -7,7 +7,9 @@ export async function loader() {
 
   console.log('inside of loader', contacts);
 
-  return contacts;
+  const contacts2 = [...contacts, { name: 'qwertyu' }];
+
+  return contacts2;
 }
 
 export default function Root() {
@@ -17,7 +19,8 @@ export default function Root() {
   return (
     <>
       <div id='sidebar'>
-        <h1>React Router Contacts</h1>
+        <Header />
+        {/*<h1>React Router Contacts</h1>*/}
         <div>
           <form id='search-form' role='search'>
             <input
@@ -66,4 +69,10 @@ export default function Root() {
       </div>
     </>
   );
+}
+
+function Header() {
+  const contacts = useLoaderData() as Contact[];
+  console.log('inside of Header', contacts);
+  return <h1>React Router Contacts???</h1>;
 }
