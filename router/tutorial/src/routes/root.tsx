@@ -2,12 +2,15 @@ import { Link, Outlet, useLoaderData } from 'react-router-dom';
 import { getContacts } from '../contact.ts';
 import { Contact } from '../utils/types.ts';
 
-export async function loader() {
+export async function loader(): Promise<Contact[]> {
   const contacts: Contact[] = await getContacts();
 
   console.log('inside of loader', contacts);
 
-  const contacts2: Contact[] = [...contacts, {}];
+  const contacts2: Contact[] = [
+    ...contacts,
+    { id: '123', last: 'Mirodil', first: 'qwert' },
+  ];
 
   return contacts2;
 }
@@ -74,5 +77,7 @@ export default function Root() {
 function Header() {
   const contacts = useLoaderData() as Contact[];
   console.log('inside of Header', contacts);
-  return <h1>React Router Contacts???</h1>;
+
+  // console.log(jjj);
+  return <h1>React Router Contacts???!!!</h1>;
 }
