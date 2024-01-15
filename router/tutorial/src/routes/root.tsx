@@ -3,11 +3,11 @@ import { getContacts } from '../contact.ts';
 import { Contact } from '../utils/types.ts';
 
 export async function loader() {
-  const contacts = await getContacts();
+  const contacts: Contact[] = await getContacts();
 
   console.log('inside of loader', contacts);
 
-  const contacts2 = [...contacts, { name: 'qwertyu' }];
+  const contacts2: Contact[] = [...contacts, {}];
 
   return contacts2;
 }
