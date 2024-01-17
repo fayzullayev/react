@@ -16,6 +16,6 @@ export default function ErrorPage() {
       </div>
     );
   } else {
-    return <h1>Bosh qa error</h1>;
+    return <h1>Bosh qa error: </h1>;
   }
 }

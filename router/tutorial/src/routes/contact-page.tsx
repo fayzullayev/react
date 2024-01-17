@@ -1,15 +1,37 @@
-import { Form } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  LoaderFunctionArgs,
+  useFetcher,
+  useLoaderData,
+} from 'react-router-dom';
 import { Contact } from '../utils/types.ts';
+import { getContact, updateContact } from '../contact.ts';
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  const formData = await request.formData();
+
+  return updateContact(params.contactId, {
+    favorite: formData.get('favorite') === 'true',
+  });
+}
+
+export async function loader({ params: { contactId } }: LoaderFunctionArgs) {
+  console.log('contactId', contactId);
+
+  const contact: Contact | null = await getContact(contactId);
+
+  return contact;
+}
 
 export default function ContactPage() {
-  const contact: Contact = {
-    first: 'Your',
-    last: 'Name',
-    avatar: 'https://placekitten.com/g/200/200',
-    twitter: 'your_handle',
-    notes: 'Some notes',
-    favorite: true,
-  };
+  const contact = useLoaderData() as Contact | null;
+
+  console.log('contact in contact-page', contact);
+
+  if (!contact) {
+    return <h1>No record found</h1>;
+  }
 
   return (
     <div id='contact'>
@@ -20,7 +42,6 @@ export default function ContactPage() {
           alt={'Just image'}
         />
       </div>
-
       <div>
         <h1>
           {contact.first || contact.last ? (
@@ -69,11 +90,16 @@ type FavoriteProps = {
 };
 
 function Favorite({ contact }: FavoriteProps) {
+  const fetcher = useFetcher();
   // yes, this is a `let` for later
-  const favorite = contact.favorite;
+  let favorite = contact.favorite;
+
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get('favorite') === 'true';
+  }
 
   return (
-    <Form method='post'>
+    <fetcher.Form method='post'>
       <button
         name='favorite'
         value={favorite ? 'false' : 'true'}
@@ -81,6 +107,6 @@ function Favorite({ contact }: FavoriteProps) {
       >
         {favorite ? '★' : '☆'}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }

@@ -6,4 +6,5 @@ export type Contact = {
   twitter?: string;
   notes?: string;
   favorite?: boolean;
+  createdAt?: number;
 };

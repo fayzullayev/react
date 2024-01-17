@@ -16,7 +16,7 @@ export async function getContacts(query: string = '') {
 export async function createContact() {
   await fakeNetwork();
   const id = Math.random().toString(36).substring(2, 9);
-  const contact = { id, createdAt: Date.now() };
+  const contact: Contact = { id, createdAt: Date.now() };
   const contacts = await getContacts();
   contacts.unshift(contact);
   await set(contacts);
@@ -30,7 +30,7 @@ export async function getContact(id: string = '') {
   return contact ?? null;
 }
 
-export async function updateContact(id: string, updates: Contact) {
+export async function updateContact(id: string | undefined, updates: Contact) {
   await fakeNetwork();
   const contacts = (await localforage.getItem('contacts')) as Contact[];
   const contact = contacts.find((contact) => contact.id === id);
@@ -74,6 +74,6 @@ async function fakeNetwork(key: string = '') {
   fakeCache[key] = true;
 
   return new Promise((res) => {
-    setTimeout(res, Math.random() * 800);
+    setTimeout(res, Math.random() * 2000);
   });
 }
