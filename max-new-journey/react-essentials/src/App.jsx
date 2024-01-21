@@ -5,6 +5,7 @@ function App() {
     <div className="hello">
       <Header level="Fundamental" />
       <Header level="Cruial" />
+      <Header level="Core" />
       <main>
         <h2>Time to get started!</h2>
       </main>

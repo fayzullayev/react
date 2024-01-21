@@ -1,4 +1,5 @@
 import {
+  ActionFunctionArgs,
   Form,
   LoaderFunctionArgs,
   NavLink,
@@ -13,7 +14,8 @@ import { Contact } from '../utils/types.ts';
 import { useEffect, useState } from 'react';
 // import { useEffect } from 'react';
 
-export async function action() {
+export async function action(dd: ActionFunctionArgs) {
+  console.log('action', dd);
   const contact = await createContact();
   console.log('contact', contact);
   return redirect(`/contacts/${contact.id}/edit`);
@@ -23,6 +25,8 @@ export async function loader(
   loaderData: LoaderFunctionArgs,
 ): Promise<{ contacts: Contact[]; q: string | null }> {
   const url = new URL(loaderData.request.url);
+
+  console.log('loaderData', loaderData);
 
   const q = url.searchParams.get('q') || '';
 
