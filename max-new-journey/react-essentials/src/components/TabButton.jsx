@@ -1,21 +1,23 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-function TabButton({ onSelect, children }) {
+function TabButton({ onSelect, isActive, children }) {
   function handleClick() {
     onSelect();
   }
 
   return (
     <li>
-      <button onClick={handleClick}>{children}</button>
+      <button className={isActive ? 'active' : ''} onClick={handleClick}>
+        {children}
+      </button>
     </li>
   );
 }
 
 TabButton.propTypes = {
-  children: PropTypes.elementType,
-  onClick: PropTypes.func,
+  children: PropTypes.elementType.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default TabButton;
