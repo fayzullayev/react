@@ -7,7 +7,6 @@ import TabButton from './components/TabButton.jsx';
 function App() {
   const [activeTab, setActiveTab] = useState('');
 
-  console.log(activeTab);
   return (
     <div className="hello">
       <Header level="Fundamental" />
@@ -20,7 +19,6 @@ function App() {
             ))}
           </ul>
         </section>
-        <h2>Time to get started!</h2>
 
         <section id="examples">
           <h2>Examples</h2>
