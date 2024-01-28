@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 
 function TabButton({ onSelect, isActive, children }) {
-  function handleClick() {
-    onSelect();
-  }
-
   return (
     <li>
-      <button className={isActive ? 'active' : ''} onClick={handleClick}>
+      <button className={isActive ? 'active' : ''} onClick={onSelect}>
         {children}
       </button>
     </li>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Header from './components/Header/Header.jsx';
 import CoreConcept from './components/CoreConcept.jsx';
-import { CORE_CONCEPTS, EXAMPLES } from './data.js';
 import TabButton from './components/TabButton.jsx';
+import { CORE_CONCEPTS, EXAMPLES } from './data.js';
 
 function App() {
   const [activeTab, setActiveTab] = useState('');
