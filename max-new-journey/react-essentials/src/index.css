@@ -7,10 +7,8 @@
 html {
     font-family: "Quicksand", sans-serif;
     line-height: 1.5;
-
     color: #ebe7ef;
     background: radial-gradient(#280a48, #20043d);
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -53,6 +51,7 @@ main h2 {
 #core-concepts li {
     width: 10rem;
     text-align: center;
+    border: 1px solid red;
 }
 
 #core-concepts li img {
