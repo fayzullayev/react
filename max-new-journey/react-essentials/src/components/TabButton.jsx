@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-function TabButton({ onSelect, isActive, children }) {
+function TabButton({ isActive, children, ...props }) {
   return (
     <li>
-      <button className={isActive ? 'active' : ''} onClick={onSelect}>
+      <button className={isActive ? 'active' : ''} {...props}>
         {children}
       </button>
     </li>
@@ -12,7 +12,6 @@ function TabButton({ onSelect, isActive, children }) {
 
 TabButton.propTypes = {
   children: PropTypes.elementType.isRequired,
-  onSelect: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 
