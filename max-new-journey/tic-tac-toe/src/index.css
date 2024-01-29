@@ -25,7 +25,10 @@ body {
     ),
     url('bg-pattern-dark.png');
   background-repeat: repeat;
-  background-size: 100% 100%, 30% 30%, 100% 100%;
+  background-size:
+    100% 100%,
+    30% 30%,
+    100% 100%;
   min-height: 110rem;
 }
 
@@ -228,7 +231,9 @@ ol {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s, color 0.2s;
+  transition:
+    all 0.2s,
+    color 0.2s;
   box-shadow: 0 0 8px rgba(255, 187, 0, 0.4);
 }
 
