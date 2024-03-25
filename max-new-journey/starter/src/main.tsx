@@ -10,17 +10,3 @@ ReactDOM.createRoot(rootElement).render(
     <App />
   </React.StrictMode>,
 );
-
-function myFunc(cb: () => void) {
-  setTimeout(() => {
-    cb();
-  }, 2000);
-}
-
-const cb = () => {
-  console.log('Hello');
-};
-
-myFunc(cb);
-
-console.log(1234);
