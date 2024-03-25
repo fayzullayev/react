@@ -3,8 +3,24 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')!;
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
 );
+
+function myFunc(cb: () => void) {
+  setTimeout(() => {
+    cb();
+  }, 2000);
+}
+
+const cb = () => {
+  console.log('Hello');
+};
+
+myFunc(cb);
+
+console.log(1234);
