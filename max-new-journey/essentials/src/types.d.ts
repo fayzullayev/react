@@ -5,3 +5,13 @@ type CoreConceptType = {
 };
 
 type CoreConceptsType = CoreConceptType[];
+
+type ExampleType = {
+  title: string;
+  description: string;
+  code: string;
+};
+
+type ExamplesType = {
+  [key: string]: ExampleType;
+};

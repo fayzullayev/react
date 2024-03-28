@@ -1,17 +1,24 @@
-import { ReactNode, memo } from 'react';
+import { memo } from 'react';
 
 type TabButtonProps = {
-  children: ReactNode;
+  label: string;
   onSelect: (id: string) => void;
+  isActive: boolean;
 };
 
-function TabButton({ onSelect, children }: TabButtonProps) {
-  console.log(children);
+export default memo(function TabButton({
+  onSelect,
+  isActive,
+  label,
+}: TabButtonProps) {
   return (
     <li>
-      <button onClick={() => onSelect(children as string)}>{children}</button>
+      <button
+        className={isActive ? 'active' : ''}
+        onClick={() => onSelect(label)}
+      >
+        {label}
+      </button>
     </li>
   );
-}
-
-export default memo(TabButton);
+});

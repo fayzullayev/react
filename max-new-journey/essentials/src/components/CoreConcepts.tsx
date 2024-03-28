@@ -10,7 +10,7 @@ function CoreConcepts({ coreConcepts }: CoreConceptsProps) {
       <h2>Core Concepts</h2>
       <ul>
         {coreConcepts.map((concept) => (
-          <CoreConcept {...concept} />
+          <CoreConcept key={concept.title} {...concept} />
         ))}
       </ul>
     </section>
