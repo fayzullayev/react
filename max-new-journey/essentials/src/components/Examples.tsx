@@ -1,6 +1,8 @@
 import TabButton from './TabButton.tsx';
 import { useCallback, useState } from 'react';
 import { EXAMPLES } from '../data.ts';
+import Section from './Section.tsx';
+import Tabs from './Tabs.tsx';
 
 function Examples() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
@@ -16,42 +18,46 @@ function Examples() {
   }
 
   return (
-    <section id={'examples'}>
-      <h2>Examples</h2>
-      <menu>
-        <TabButton
-          isActive={selectedTopic === 'Components'}
-          onSelect={handleSelect}
-          label="Components"
-        />
-        <TabButton
-          isActive={selectedTopic === 'JSX'}
-          onSelect={handleSelect}
-          label="JSX"
-        />
-        <TabButton
-          isActive={selectedTopic === 'Props'}
-          onSelect={handleSelect}
-          label="Props"
-        />
-        <TabButton
-          isActive={selectedTopic === 'State'}
-          onSelect={handleSelect}
-          label="State"
-        />
-      </menu>
-      {example ? (
-        <div id={'tab-content'}>
-          <h3>{example.title}</h3>
-          <p>{example.description}</p>
-          <pre>
-            <code>{example.code}</code>
-          </pre>
-        </div>
-      ) : (
-        'Please select a topic'
-      )}
-    </section>
+    <Section id={'examples'} title="Examples">
+      <Tabs
+        buttons={
+          <>
+            <TabButton
+              isActive={selectedTopic === 'Components'}
+              onSelect={handleSelect}
+              label="Components"
+            />
+            <TabButton
+              isActive={selectedTopic === 'JSX'}
+              onSelect={handleSelect}
+              label="JSX"
+            />
+            <TabButton
+              isActive={selectedTopic === 'Props'}
+              onSelect={handleSelect}
+              label="Props"
+            />
+            <TabButton
+              isActive={selectedTopic === 'State'}
+              onSelect={handleSelect}
+              label="State"
+            />
+          </>
+        }
+      >
+        {example ? (
+          <div id={'tab-content'}>
+            <h3>{example.title}</h3>
+            <p>{example.description}</p>
+            <pre>
+              <code>{example.code}</code>
+            </pre>
+          </div>
+        ) : (
+          'Please select a topic'
+        )}
+      </Tabs>
+    </Section>
   );
 }
 

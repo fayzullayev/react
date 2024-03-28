@@ -1,6 +1,5 @@
 import Header from './components/Header.tsx';
 import CoreConcepts from './components/CoreConcepts.tsx';
-import { CORE_CONCEPTS } from './data.ts';
 import Examples from './components/Examples.tsx';
 
 function App() {
@@ -8,7 +7,7 @@ function App() {
     <>
       <Header />
       <main>
-        <CoreConcepts coreConcepts={CORE_CONCEPTS} />
+        <CoreConcepts />
         <Examples />
       </main>
     </>

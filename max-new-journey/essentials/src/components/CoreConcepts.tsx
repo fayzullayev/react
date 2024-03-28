@@ -1,15 +1,13 @@
 import CoreConcept from './CoreConcept.tsx';
+import { CORE_CONCEPTS } from '../data.ts';
 
-type CoreConceptsProps = {
-  coreConcepts: CoreConceptsType;
-};
-
-function CoreConcepts({ coreConcepts }: CoreConceptsProps) {
+function CoreConcepts() {
   return (
     <section id={'core-concepts'}>
       <h2>Core Concepts</h2>
+
       <ul>
-        {coreConcepts.map((concept) => (
+        {CORE_CONCEPTS.map((concept) => (
           <CoreConcept key={concept.title} {...concept} />
         ))}
       </ul>

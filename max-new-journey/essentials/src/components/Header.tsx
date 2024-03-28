@@ -1,10 +1,11 @@
 import reactImg from '../assets/react-core-concepts.png';
+import { memo } from 'react';
 
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 function genRandomInt(max: number): number {
   return Math.floor(Math.random() * (max + 1));
 }
-function Header() {
+export default memo(function Header() {
   const label = reactDescriptions[genRandomInt(2)];
 
   return (
@@ -18,6 +19,4 @@ function Header() {
       </p>
     </header>
   );
-}
-
-export default Header;
+});
