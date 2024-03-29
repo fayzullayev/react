@@ -4,8 +4,9 @@ type PlayerProps = {
   name: string;
   symbol: string;
   setName: Dispatch<SetStateAction<string>>;
+  isActive: boolean;
 };
-function Player({ name, symbol, setName }: PlayerProps) {
+function Player({ name, symbol, setName, isActive }: PlayerProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   function handleEditClick() {
@@ -26,7 +27,7 @@ function Player({ name, symbol, setName }: PlayerProps) {
   }
 
   return (
-    <li>
+    <li className={isActive ? "active" : ""}>
       <span className={"player"}>
         {playerName}
         <span className={"player-symbol"}>{symbol}</span>
