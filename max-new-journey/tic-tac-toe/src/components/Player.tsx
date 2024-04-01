@@ -1,16 +1,26 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 type PlayerProps = {
-  name: string;
   symbol: string;
-  setName: Dispatch<SetStateAction<string>>;
   isActive: boolean;
+  initialName: string;
+  onChangeName: (symbol: string, newName: string) => void;
 };
-function Player({ name, symbol, setName, isActive }: PlayerProps) {
+function Player({ symbol, isActive, onChangeName, initialName }: PlayerProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-
+  const [name, setName] = useState(initialName);
   function handleEditClick() {
     setIsEdit((prevState) => !prevState);
+
+    if (isEdit) {
+      onChangeName(symbol, name);
+    }
+  }
+
+  function handleChangeName({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) {
+    setName(value);
   }
 
   let playerName = <span className={"player-name"}>{name}</span>;
@@ -21,7 +31,7 @@ function Player({ name, symbol, setName, isActive }: PlayerProps) {
         type="text"
         value={name}
         required={true}
-        onChange={(event) => setName(event.target.value)}
+        onChange={handleChangeName}
       />
     );
   }

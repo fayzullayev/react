@@ -15,47 +15,38 @@ export type Turn = {
   player: string;
 };
 
+type Players = {
+  [key: string]: string;
+};
+
 export type Column = null | string;
 
-const initialGameBoard: Column[][] = [
+const PLAYERS = {
+  X: "Player 1",
+  O: "Player 2",
+};
+
+const INITIAL_GAME_BOARD: Column[][] = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
 function App() {
-  const [rightUser, setRightUser] = useState<string>("Player 1");
-  const [leftUser, setLeftUser] = useState<string>("Player 2");
   const [gameTurns, setGameTurns] = useState<Turn[]>([]);
+  const [players, setPlayers] = useState<Players>(PLAYERS);
 
-  const activePlayer = deriveActivePlayer(gameTurns);
-
-  let winner: string | null = null;
-
-  let gameBoard = initialGameBoard;
-
-  for (const turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
+  function handlePlayerNameChange(symbol: string, newName: string) {
+    setPlayers((prevState) => {
+      return {
+        ...prevState,
+        [symbol]: newName,
+      };
+    });
   }
 
-  for (const combination of WINNING_COMBINATIONS) {
-    const firstSquareSymbol =
-      gameBoard[combination[0].row][combination[0].column];
-    const secondSquareSymbol =
-      gameBoard[combination[1].row][combination[1].column];
-    const thirdSquareSymbol =
-      gameBoard[combination[2].row][combination[2].column];
-
-    if (
-      firstSquareSymbol &&
-      firstSquareSymbol === secondSquareSymbol &&
-      firstSquareSymbol === thirdSquareSymbol
-    ) {
-      winner = firstSquareSymbol;
-    }
+  function handleRematch() {
+    setGameTurns([]);
   }
 
   function handleSelectSquare(rowIndex: number, colIndex: number) {
@@ -69,27 +60,26 @@ function App() {
     });
   }
 
+  const gameBoard = deriveGameBoard(gameTurns);
+  const activePlayer = deriveActivePlayer(gameTurns);
+  const winner: string | null = deriveWinner(gameBoard, players);
   const hasDraw = gameTurns.length === 9 && !winner;
-
-  function handleRematch() {
-    setGameTurns([]);
-  }
 
   return (
     <main>
       <div id={"game-container"}>
         <ol id={"players"} className={"highlight-player"}>
           <Player
-            name={rightUser}
             isActive={activePlayer === "X"}
-            setName={setRightUser}
             symbol="X"
+            onChangeName={handlePlayerNameChange}
+            initialName={PLAYERS.X}
           />
           <Player
-            name={leftUser}
-            setName={setLeftUser}
             symbol="O"
             isActive={activePlayer === "O"}
+            onChangeName={handlePlayerNameChange}
+            initialName={PLAYERS.O}
           />
         </ol>
         {(winner || hasDraw) && (
@@ -110,6 +100,41 @@ function deriveActivePlayer(gameTurns: Turn[]): string {
   }
 
   return currentPlayer;
+}
+
+function deriveWinner(gameBoard: Column[][], player: Players): string | null {
+  let winner: string | null = null;
+  for (const combination of WINNING_COMBINATIONS) {
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      firstSquareSymbol === thirdSquareSymbol
+    ) {
+      winner = player[firstSquareSymbol];
+    }
+  }
+
+  return winner;
+}
+
+function deriveGameBoard(gameTurns: Turn[]): Column[][] {
+  const gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
+
+  for (const turn of gameTurns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+
+    gameBoard[row][col] = player;
+  }
+
+  return gameBoard;
 }
 
 export default App;
