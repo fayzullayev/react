@@ -4,7 +4,8 @@
 // - annualInvestment: The amount invested every year
 // - expectedReturn: The expected (annual) rate of return
 // - duration: The investment duration (time frame)
-import { InvestmentType } from '../components/UserInput.tsx';
+
+import { InvestmentType } from '../App.tsx';
 
 export function calculateInvestmentResults({
   initialInvestment,

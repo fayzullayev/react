@@ -1,31 +1,12 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
+import { InvestmentType } from '../App.tsx';
 
-export type InvestmentType = {
-  [key: string]: number;
+type UserInputProps = {
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  userInputs: InvestmentType;
 };
 
-const INITIAL_VALUE: InvestmentType = {
-  initialInvestment: 10000,
-  annualInvestment: 1200,
-  expectedReturn: 6,
-  duration: 6,
-};
-
-type UserInputProps = {};
-function UserInput({}: UserInputProps) {
-  const [userInput, setUserInput] = useState<InvestmentType>(INITIAL_VALUE);
-
-  function handleChange({
-    target: { value, name },
-  }: ChangeEvent<HTMLInputElement>) {
-    setUserInput((prevInputs) => ({
-      ...prevInputs,
-      [name]: +value,
-    }));
-  }
-
-  console.log('userInput', userInput);
-
+function UserInput({ onChange, userInputs }: UserInputProps) {
   return (
     <section id="user-input">
       <div className={'input-group'}>
@@ -34,9 +15,9 @@ function UserInput({}: UserInputProps) {
           <input
             type="number"
             name="initialInvestment"
-            value={userInput['initialInvestment']}
+            value={userInputs['initialInvestment']}
             required={true}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </p>
         <p>
@@ -44,9 +25,9 @@ function UserInput({}: UserInputProps) {
           <input
             type="number"
             name="annualInvestment"
-            value={userInput['annualInvestment']}
+            value={userInputs['annualInvestment']}
             required={true}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </p>
       </div>
@@ -57,9 +38,9 @@ function UserInput({}: UserInputProps) {
           <input
             type="number"
             name="expectedReturn"
-            value={userInput['expectedReturn']}
+            value={userInputs['expectedReturn']}
             required={true}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </p>
         <p>
@@ -67,9 +48,9 @@ function UserInput({}: UserInputProps) {
           <input
             type="number"
             name="duration"
-            value={userInput['duration']}
+            value={userInputs['duration']}
             required={true}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </p>
       </div>
