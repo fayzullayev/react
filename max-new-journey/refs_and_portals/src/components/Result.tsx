@@ -2,7 +2,8 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 type Result = {
   targetTime: number;
-  result: string;
+  timeReaming: number;
+  reset: () => void;
 };
 
 export interface RefType {
@@ -10,32 +11,36 @@ export interface RefType {
 }
 
 const Result = forwardRef<RefType, Result>(
-  ({ result, targetTime }, dialogRef) => {
+  ({ targetTime, timeReaming, reset }, dialogRef) => {
     const dRef = useRef<HTMLDialogElement | null>(null);
 
-    useImperativeHandle(
-      dialogRef,
-      () => ({
-        openMyDialog: () => {
-          if (dRef.current) {
-            dRef.current.showModal();
-          }
-        },
-      }),
-      [],
-    );
+    const userLost = timeReaming <= 0;
+
+    const formattedRemainingTime = (timeReaming / 1000).toFixed(2);
+
+    const score = Math.round((1 - timeReaming / targetTime) * 100);
+
+    useImperativeHandle(dialogRef, () => ({
+      openMyDialog: () => {
+        if (dRef.current) {
+          dRef.current.showModal();
+        }
+      },
+    }));
 
     return (
-      <dialog ref={dRef} className="result-modal" open={true}>
-        <h2>Your {result}</h2>
+      <dialog ref={dRef} className="result-modal">
+        {userLost && <h2>Your lost</h2>}
+        {!userLost}
         <p>
-          The target time was <strong>{targetTime}seconds</strong>
+          The target time was <strong>{targetTime} seconds</strong>
         </p>
         <p>
-          You stopped the timer with <strong>X seconds left.</strong>
+          You stopped the timer with{' '}
+          <strong>{formattedRemainingTime} seconds left.</strong>
         </p>
 
-        <form method="dialog">
+        <form method="dialog" onSubmit={reset}>
           <button>Close</button>
         </form>
       </dialog>
