@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import Result, { RefType } from './Result.tsx';
+import Result, { RefType } from './Result';
+// import { createPortal } from 'react-dom';
 
 type TimerChallengeProps = {
   title: string;
@@ -7,9 +8,6 @@ type TimerChallengeProps = {
 };
 
 function TimerChallenge({ title, targetTime }: TimerChallengeProps) {
-  const [timerStarted, setTimerStarted] = useState<boolean>(false);
-  const [timerExpired, setTimerExpired] = useState<boolean>(false);
-
   const timerRef = useRef<number | null>(null);
   const dialogRef = useRef<RefType | null>(null);
 
@@ -19,9 +17,6 @@ function TimerChallenge({ title, targetTime }: TimerChallengeProps) {
 
   if (timeReaming <= 0) {
     handleStop();
-    if (dialogRef.current) {
-      dialogRef.current.openMyDialog();
-    }
   }
 
   function handleReset() {
@@ -29,8 +24,6 @@ function TimerChallenge({ title, targetTime }: TimerChallengeProps) {
   }
 
   function handleStart() {
-    setTimerStarted(true);
-
     timerRef.current = setInterval(() => {
       setTimeReaming((prevState) => prevState - 10);
     }, 10);
@@ -46,6 +39,8 @@ function TimerChallenge({ title, targetTime }: TimerChallengeProps) {
     }
   }
 
+  // createPortal();
+
   return (
     <>
       <Result
@@ -57,7 +52,7 @@ function TimerChallenge({ title, targetTime }: TimerChallengeProps) {
 
       <section className="challenge">
         <h2>{title}</h2>
-        {timerExpired && <p>You lost</p>}
+
         <p className="challenge-time">
           {targetTime} second{targetTime > 0 ? 's' : ''}
         </p>
