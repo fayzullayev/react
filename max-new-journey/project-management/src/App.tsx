@@ -4,15 +4,15 @@ import NoProjectSelected from './components/NoProjectSelected.tsx';
 import { useState } from 'react';
 import Details from './components/Details.tsx';
 
-export interface Project extends InputsType {
-  id: number;
-  tasks: Task[];
-}
-
 export type Task = {
   id: number;
   title: string;
 };
+
+export interface Project extends InputsType {
+  id: number;
+  tasks: Task[];
+}
 
 type ProjectsState = {
   selectedProjectId: undefined | null | number;
@@ -117,8 +117,6 @@ function App() {
       selectedProjectId: id,
     }));
   }
-
-  console.log(projectState);
 
   return (
     <main className="h-screen my-8 flex gap-8">
