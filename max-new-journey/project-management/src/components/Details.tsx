@@ -1,23 +1,7 @@
-import { Project } from '../App.tsx';
 import Button from './Button.tsx';
 import Tasks from './Tasks.tsx';
 
-type DetailsProps = Project & {
-  onDelete: (id: number) => void;
-  onAddTask: (projectId: number, task: string) => void;
-  onDeleteTask: (projectId: number, taskId: number) => void;
-};
-
-function Details({
-  title,
-  dueDate,
-  description,
-  onDelete,
-  id,
-  tasks,
-  onAddTask,
-  onDeleteTask,
-}: DetailsProps) {
+function Details() {
   const formattedDate = new Date(dueDate).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',

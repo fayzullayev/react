@@ -1,11 +1,9 @@
 import noProject from '../assets/no-projects.png';
 import Button from './Button.tsx';
+import { useProjects } from '../projects-context.tsx';
 
-type NoProjectSelectedProps = {
-  onStartAddProject: () => void;
-};
-
-function NoProjectSelected({ onStartAddProject }: NoProjectSelectedProps) {
+function NoProjectSelected() {
+  const { onStartAddProject } = useProjects();
   return (
     <div className="mt-24 text-center w-2/3">
       <img

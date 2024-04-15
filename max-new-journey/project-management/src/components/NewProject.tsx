@@ -2,18 +2,7 @@ import Input from './Input.tsx';
 import { useRef } from 'react';
 import Modal, { ModalRef } from './Modal.tsx';
 
-export type InputsType = {
-  title: string;
-  description: string;
-  dueDate: string;
-};
-
-type NewProjectProps = {
-  onAddProject: (inputs: InputsType) => void;
-  onCancelProject: () => void;
-};
-
-function NewProject({ onAddProject, onCancelProject }: NewProjectProps) {
+function NewProject() {
   const title = useRef<HTMLInputElement | null>(null);
   const description = useRef<HTMLTextAreaElement | null>(null);
   const dueDate = useRef<HTMLInputElement | null>(null);
