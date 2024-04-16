@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useReducer } from 'react';
-import { api } from './api/api.ts';
+import { getProjects } from './api/projects.ts';
 
 export type Task = {
   id: number;
@@ -8,7 +8,6 @@ export type Task = {
 
 export interface Project {
   id: number;
-  tasks: Task[];
   title: string;
   description: string;
   dueDate: string;
@@ -40,8 +39,9 @@ export function ProjectsProvider({ children }: ProjectsProviderProps) {
   async function handleGetProjects() {
     dispatch({ type: ACTION_TYPE.START_FETCHING });
     try {
-      const { data } = await api.get('/projects');
-      dispatch({ type: ACTION_TYPE.END_FETCHING, payload: data });
+      const projects = await getProjects();
+
+      dispatch({ type: ACTION_TYPE.END_FETCHING, payload: projects });
     } catch (error: any) {
       dispatch({ type: ACTION_TYPE.ON_ERROR, payload: error.message });
     }
