@@ -39,9 +39,9 @@ export function ProjectsProvider({ children }: ProjectsProviderProps) {
   async function handleGetProjects() {
     dispatch({ type: ACTION_TYPE.START_FETCHING });
     try {
-      const projects = await getProjects();
+      const response = await getProjects();
 
-      dispatch({ type: ACTION_TYPE.END_FETCHING, payload: projects });
+      dispatch({ type: ACTION_TYPE.END_FETCHING, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION_TYPE.ON_ERROR, payload: error.message });
     }

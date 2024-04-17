@@ -1,30 +1,41 @@
-import Input from './Input.tsx';
 import { useRef } from 'react';
-import Modal, { ModalRef } from './Modal.tsx';
+import Input from '../../components/Input.tsx';
+import Modal, { ModalRef } from '../../components/Modal.tsx';
+import { Link, useNavigate } from 'react-router-dom';
+import { createProject } from '../../api/projects.ts';
 
-function NewProject() {
+function CreateProject() {
   const title = useRef<HTMLInputElement | null>(null);
   const description = useRef<HTMLTextAreaElement | null>(null);
   const dueDate = useRef<HTMLInputElement | null>(null);
   const modalRef = useRef<ModalRef | null>(null);
+  const navigate = useNavigate();
 
-  function handleSave() {
+  async function handleSave() {
     const enteredTitle = title.current?.value;
     const enteredDescription = description.current?.value;
     const enteredDueDate = dueDate.current?.value;
+
+    console.log(dueDate.current);
 
     if (
       enteredTitle?.trim() &&
       enteredDescription?.trim() &&
       enteredDueDate?.trim()
     ) {
-      onAddProject({
-        title: enteredTitle,
-        description: enteredDescription,
-        dueDate: enteredDueDate,
-      });
+      try {
+        const response = await createProject({
+          title: enteredTitle,
+          description: enteredDescription,
+          dueDate: enteredDueDate,
+        });
+
+        console.log('response', response);
+        navigate('/projects/' + response.data.projectId);
+      } catch (e: any) {
+        alert(e);
+      }
     } else {
-      // alert('Invalid inputs');
       modalRef.current?.openModal();
     }
   }
@@ -41,12 +52,11 @@ function NewProject() {
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button
-              className="text-stone-800 hover:text-stone-950"
-              onClick={onCancelProject}
-            >
-              Cancel
-            </button>
+            <Link to="/">
+              <button className="text-stone-800 hover:text-stone-950">
+                Cancel
+              </button>
+            </Link>
           </li>
           <li>
             <button
@@ -67,4 +77,4 @@ function NewProject() {
   );
 }
 
-export default NewProject;
+export default CreateProject;

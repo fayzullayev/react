@@ -1,9 +1,8 @@
-import noProject from '../assets/no-projects.png';
-import Button from './Button.tsx';
-import { useProjects } from '../projects-context.tsx';
+import { Link } from 'react-router-dom';
+import noProject from '../../assets/no-projects.png';
+import Button from '../../components/Button.tsx';
 
-function NoProjectSelected() {
-  const { onStartAddProject } = useProjects();
+function Home() {
   return (
     <div className="mt-24 text-center w-2/3">
       <img
@@ -18,10 +17,12 @@ function NoProjectSelected() {
         Select a project or get started with a new one
       </p>
       <p className="mt-8">
-        <Button onClick={onStartAddProject}>Create new project</Button>
+        <Button>
+          <Link to="/create-project">Create new project</Link>
+        </Button>
       </p>
     </div>
   );
 }
 
-export default NoProjectSelected;
+export default Home;
