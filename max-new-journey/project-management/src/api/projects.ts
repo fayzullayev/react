@@ -1,5 +1,4 @@
 import { api } from './api.ts';
-import { Project } from '../projects-context.tsx';
 
 type ProjectForCreateType = {
   title: string;

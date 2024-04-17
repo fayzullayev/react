@@ -2,16 +2,32 @@ import NewTask from './NewTask.tsx';
 import { Task } from '../projects-context.tsx';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { getTasks } from '../api/task.ts';
 
 function Tasks() {
   const { id } = useParams();
-  const [tasks, setTasks] = useState<Task | null>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
+
   function handleDeleteTask(taskId: number) {
-    // onDeleteTask(taskId);
-    console.log(taskId);
+    const confirmation = confirm(
+      `Are you sure you want to delete this task(${taskId})?`,
+    );
+
+    if (confirmation) {
+      //delete task
+    }
   }
 
-  useEffect(() => {}, [id]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getTasks(id);
+        setTasks(response.data);
+      } catch (e: any) {
+        alert(e.message);
+      }
+    })();
+  }, [id]);
 
   return (
     <section>
