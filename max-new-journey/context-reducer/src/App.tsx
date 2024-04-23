@@ -3,6 +3,7 @@ import Header from "./components/Header.tsx";
 import Shop from "./components/Shop.tsx";
 import { DUMMY_PRODUCTS } from "./dummy-products.ts";
 import { CartItem } from "./type.ts";
+import Product from "./components/Product.tsx";
 
 export type CartState = {
   items: CartItem[];
@@ -74,7 +75,13 @@ function App() {
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
-      <Shop onAddItemToCart={handleAddItemToCart} />
+      <Shop>
+        {DUMMY_PRODUCTS.map((product) => (
+          <li key={product.id}>
+            <Product {...product} onAddToCart={handleAddItemToCart} />
+          </li>
+        ))}
+      </Shop>
     </>
   );
 }
