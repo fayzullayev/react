@@ -1,4 +1,3 @@
-import NewTask from './NewTask.tsx';
 import { Task } from '../projects-context.tsx';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
