@@ -1,8 +1,5 @@
 import { Products } from "../type.ts";
-
-type ProductProps = Products & {
-  onAddToCart: (id: string) => void;
-};
+import { useShopContext } from "../store/shop-context.tsx";
 
 export default function Product({
   id,
@@ -10,8 +7,9 @@ export default function Product({
   title,
   price,
   description,
-  onAddToCart,
-}: ProductProps) {
+}: Products) {
+  const { onAddItemToCart } = useShopContext();
+
   return (
     <article className="product">
       <img src={image} alt={title} />
@@ -22,7 +20,7 @@ export default function Product({
           <p>{description}</p>
         </div>
         <p className="product-actions">
-          <button onClick={() => onAddToCart(id)}>Add to Cart</button>
+          <button onClick={() => onAddItemToCart(id)}>Add to Cart</button>
         </p>
       </div>
     </article>

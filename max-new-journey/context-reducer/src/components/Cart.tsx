@@ -1,11 +1,8 @@
-import { CartItem } from "../type.ts";
+import { useShopContext } from "../store/shop-context.tsx";
 
-type CartProps = {
-  items: CartItem[];
-  onUpdateItemQuantity: (productId: string, amount: number) => void;
-};
+export default function Cart() {
+  const { items, onUpdateCartItemQuantity } = useShopContext();
 
-export default function Cart({ items, onUpdateItemQuantity }: CartProps) {
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0,
@@ -27,11 +24,11 @@ export default function Cart({ items, onUpdateItemQuantity }: CartProps) {
                   <span> ({formattedPrice})</span>
                 </div>
                 <div className="cart-item-actions">
-                  <button onClick={() => onUpdateItemQuantity(item.id, -1)}>
+                  <button onClick={() => onUpdateCartItemQuantity(item.id, -1)}>
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => onUpdateItemQuantity(item.id, 1)}>
+                  <button onClick={() => onUpdateCartItemQuantity(item.id, 1)}>
                     +
                   </button>
                 </div>
