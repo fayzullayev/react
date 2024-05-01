@@ -3,6 +3,7 @@ import Input from '../../components/Input.tsx';
 import Modal, { ModalRef } from '../../components/Modal.tsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { createProject } from '../../api/projects.ts';
+import { useProjects } from '../../projects-context.tsx';
 
 function CreateProject() {
   const title = useRef<HTMLInputElement | null>(null);
@@ -10,13 +11,12 @@ function CreateProject() {
   const dueDate = useRef<HTMLInputElement | null>(null);
   const modalRef = useRef<ModalRef | null>(null);
   const navigate = useNavigate();
+  const { onGetProjects } = useProjects();
 
   async function handleSave() {
     const enteredTitle = title.current?.value;
     const enteredDescription = description.current?.value;
     const enteredDueDate = dueDate.current?.value;
-
-    console.log(dueDate.current);
 
     if (
       enteredTitle?.trim() &&
@@ -30,7 +30,8 @@ function CreateProject() {
           dueDate: enteredDueDate,
         });
 
-        console.log('response', response);
+        await onGetProjects();
+
         navigate('/projects/' + response.data.projectId);
       } catch (e: any) {
         alert(e);

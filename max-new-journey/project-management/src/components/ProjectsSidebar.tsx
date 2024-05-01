@@ -9,6 +9,7 @@ function ProjectsSidebar() {
     onGetProjects,
     state: { projects },
   } = useProjects();
+
   let { id: projectId } = useParams();
 
   useEffect(() => {
