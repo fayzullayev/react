@@ -1,10 +1,12 @@
-import reactImg from '../assets/react-core-concepts.png';
 import { memo } from 'react';
+import reactImg from '../assets/react-core-concepts.png';
 
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
+
 function genRandomInt(max: number): number {
   return Math.floor(Math.random() * (max + 1));
 }
+
 export default memo(function Header() {
   const label = reactDescriptions[genRandomInt(2)];
 

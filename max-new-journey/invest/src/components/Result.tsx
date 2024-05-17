@@ -13,7 +13,6 @@ function Result({ input }: ResultProps) {
     results[0].interest -
     results[0].annualInvestment;
 
-  console.log('results', results);
   return (
     <table id={'result'}>
       <thead>

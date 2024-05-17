@@ -40,7 +40,6 @@ export function ProjectsProvider({ children }: ProjectsProviderProps) {
     dispatch({ type: ACTION_TYPE.START_FETCHING });
     try {
       const response = await getProjects();
-
       dispatch({ type: ACTION_TYPE.END_FETCHING, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION_TYPE.ON_ERROR, payload: error.message });

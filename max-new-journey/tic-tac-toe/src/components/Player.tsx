@@ -9,6 +9,7 @@ type PlayerProps = {
 function Player({ symbol, isActive, onChangeName, initialName }: PlayerProps) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [name, setName] = useState(initialName);
+
   function handleEditClick() {
     setIsEdit((prevState) => !prevState);
 

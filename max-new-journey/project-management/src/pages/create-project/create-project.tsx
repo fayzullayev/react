@@ -11,6 +11,7 @@ function CreateProject() {
   const dueDate = useRef<HTMLInputElement | null>(null);
   const modalRef = useRef<ModalRef | null>(null);
   const navigate = useNavigate();
+
   const { onGetProjects } = useProjects();
 
   async function handleSave() {
