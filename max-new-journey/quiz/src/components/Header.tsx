@@ -1,9 +1,11 @@
-import iiii from '../assets/quiz-logo.png';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import logo from '../assets/quiz-logo.png';
 
 function Header() {
   return (
     <header>
-      <img src={iiii} alt="Quiz logo" />
+      <img src={logo} alt="Quiz logo" />
       <h1>ReactQuiz</h1>
     </header>
   );

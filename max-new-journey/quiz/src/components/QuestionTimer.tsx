@@ -9,11 +9,9 @@ function QuestionTimer({ onTimeout, timeout }: QuestionTimerProps) {
   const [time, setTime] = useState(timeout);
 
   useEffect(() => {
-    console.log('INTERVAL');
-
     const interval = setInterval(() => {
-      setTime((prevTime) => prevTime - 100);
-    }, 100);
+      setTime((prevTime) => prevTime - 10);
+    }, 10);
 
     return () => {
       clearInterval(interval);
@@ -21,7 +19,6 @@ function QuestionTimer({ onTimeout, timeout }: QuestionTimerProps) {
   }, []);
 
   useEffect(() => {
-    console.log('TIMEOUT');
     const timer = setTimeout(() => {
       onTimeout();
       setTime(timeout);
