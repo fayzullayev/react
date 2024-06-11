@@ -6,7 +6,7 @@ type QuestionTimerProps = {
 };
 
 function QuestionTimer({ onTimeout, timeout }: QuestionTimerProps) {
-  const [time, setTime] = useState(timeout);
+  const [time, setTime] = useState<number>(timeout);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,7 +24,7 @@ function QuestionTimer({ onTimeout, timeout }: QuestionTimerProps) {
       setTime(timeout);
     }, timeout);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, [timeout, onTimeout]);
 
   return <progress id="question-time" value={time} max={timeout} />;

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { questions } from '../questions.ts';
+import { questions as QUESTIONS } from '../questions.ts';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import quizCompleteImg from '../assets/quiz-complete.png';
@@ -18,7 +18,7 @@ function Quiz() {
       setUserAnswers((prevState) => [...prevState, selectedAnswer]);
 
       setTimeout(() => {
-        if (selectedAnswer === questions[activeQuestionIndex].answers[0]) {
+        if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
           setAnswerState('correct');
         } else {
           setAnswerState('wrong');
@@ -33,13 +33,9 @@ function Quiz() {
     [activeQuestionIndex],
   );
 
-  const quizIsComplete = activeQuestionIndex === questions.length;
-
-  const shuffledAnswers = [...questions[activeQuestionIndex].answers];
-
-  shuffledAnswers.sort(() => Math.random() - 0.5);
-
   const skipAnswer = useCallback(() => handleSelectAnswer(null), []);
+
+  const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
   if (quizIsComplete) {
     return (
@@ -50,11 +46,14 @@ function Quiz() {
     );
   }
 
+  const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+  shuffledAnswers.sort(() => Math.random() - 0.5);
+
   return (
     <div id="quiz">
       <div className="question">
-        <QuestionTimer timeout={5000} onTimeout={skipAnswer} />
-        <h2>{questions[activeQuestionIndex].text}</h2>
+        <QuestionTimer timeout={10000} onTimeout={skipAnswer} />
+        <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => {
             const isSelected = userAnswers[userAnswers.length - 1] === answer;
