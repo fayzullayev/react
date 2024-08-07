@@ -12,18 +12,30 @@
 //
 // let theme = userProfile.preferences.theme ?? 'light';
 //
+
 // console.log(theme);
 
 // const value = ;
 //
 // console.log(value && 'World');
 
-var a = 1;
+// var a = 1;
 
-function b() {
-  a = 10;
-  return;
-  function a() {}
-}
-b();
-console.log(a);
+//
+// function b() {
+//   a = 10;
+//   return;
+//   function a() {}
+// }
+// b();
+// console.log(a);
+
+// const person = {
+//   address: {
+//     home: {},
+//   },
+// };
+//
+// console.log(undefined ?? 'qwertyuio');
+
+//<></>
